@@ -31,7 +31,7 @@ mongo_uri = os.getenv("MONGO_DB_URL")
 ca = certifi.where()
 
 
-class LoadRetailData():
+class LoadRetailData:
 
     def __init__(self):
         pass
