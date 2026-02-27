@@ -10,21 +10,8 @@ from src.customer_churn.logging import logger
 from src.customer_churn.exception.exception import CustomerChurnException
 
 
-# 1. Read the xlsx file as a dataframe and save as parquet file:
-sheet_names = ['Year 2009-2010', 'Year 2010-2011']
-df = pd.concat(
-    pd.read_excel("data/online_retail_II.xlsx", sheet_name=sheet_names).values(),
-    ignore_index=True
-)
 
-# Change the necessary dtypes:
-df['Invoice'] = df['Invoice'].astype('str')
-df['StockCode'] = df['StockCode'].astype('str')
-df['Description'] = df['Description'].astype('str')
-
-
-
-# 2. Load the .env file:
+# Load the .env file:
 load_dotenv()
 
 mongo_uri = os.getenv("MONGO_DB_URL")
@@ -50,6 +37,8 @@ class LoadRetailData:
         df['Invoice'] = df['Invoice'].astype('str')
         df['StockCode'] = df['StockCode'].astype('str')
         df['Description'] = df['Description'].astype('str')
+        
+     
 
         # Save the DF as Parquet file:
         df.to_parquet("data/online_retail.parquet")
@@ -58,6 +47,7 @@ class LoadRetailData:
         df = pd.read_parquet("data/online_retail.parquet")
 
         return df
+
 
     def parquest_data_to_json_converter(self, df):
         self.df = df
@@ -68,6 +58,7 @@ class LoadRetailData:
             return records
         except Exception as e:
             raise CustomerChurnException(e, sys)
+
 
     def insert_data_to_mongodb(self, records, database, collection):
         try:

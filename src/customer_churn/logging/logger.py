@@ -30,7 +30,7 @@ def log_separator(section_name=""):
     This function creates a separator lines for different logs for ease of visual understanding:
     """
     separator_line = "-" * 100
-    logging.info(f"\n\n{separator_line}")
+    logging.info(f"{separator_line}")
     if section_name:
         logging.info(f"START OF: {section_name.upper()}")
         logging.info(f"{separator_line}")

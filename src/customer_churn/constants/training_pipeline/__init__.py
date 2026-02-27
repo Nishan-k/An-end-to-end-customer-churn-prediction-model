@@ -12,6 +12,7 @@ ARTIFACT_DIR: str = "Artifacts"
 FILE_NAME: str = "online_retail.parquet"
 TRAIN_FILE_NAME: str = "train.parquet"
 TEST_FILE_NAME: str = "test.parquet"
+SCHEMA_FILE_PATH: str = os.path.join("data_schema", "schema.yaml")
 
 ############################################
 # Constant variables for the Data Ingestion:
@@ -22,3 +23,14 @@ DATA_INGESTION_DIR_NAME: str = "data_ingestion"
 DATA_INGESTION_INGESTED_DIR: str = "ingested"
 DATA_INGESTION_FEATURE_STOR_DIR: str = "feature_store"
 DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO: float = 0.2
+
+
+############################################
+# Constant variables for the Data Validation:
+############################################
+DATA_VALIDATION_DIR_NAME: str = "data_validation"
+DATA_VALIDATION_VALIDATED_DIR: str = "valid"
+DATA_VALIDATION_INVALID_DIR: str = "invalid"
+DATA_VALIDATION_DRFIT_REPORT_DIR: str = "drift_report"
+DATA_VALIDATION_DRFIT_REPORT_FILE_NAME: str = "report.yaml"
+
