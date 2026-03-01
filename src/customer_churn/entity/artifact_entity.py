@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-
+from typing import Optional
 # 1. Data Ingestion Artifacts:
 @dataclass
 class DataIngestionArtifacts:
@@ -11,9 +11,9 @@ class DataIngestionArtifacts:
 @dataclass
 class DataValidationArtifacts:
     validation_status: bool
-    valid_train_file_path: str
-    valid_test_file_path: str
-    invalid_train_file_path: str
-    invalid_test_file_path: str
-    drift_report_file_path: str
+    valid_train_file_path: Optional[str] = None
+    valid_test_file_path: Optional[str] = None
+    invalid_train_file_path: Optional[str] = None
+    invalid_test_file_path: Optional[str] = None
+    drift_report_file_path: Optional[str] = None
     

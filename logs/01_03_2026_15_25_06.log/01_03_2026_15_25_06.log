@@ -1,0 +1,4 @@
+[2026-03-01 15:25:08,259] 14 root - INFO - Reading YAML file from the path: data_schema\schema.yaml
+[2026-03-01 15:25:08,263] 118 root - INFO - Data Validation Pipeline Started:
+[2026-03-01 15:25:08,263] 47 root - INFO - Column length validation success!
+[2026-03-01 15:25:08,263] 47 root - INFO - Column length validation success!

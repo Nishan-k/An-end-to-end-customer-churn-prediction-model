@@ -1,7 +1,8 @@
 import logging
 import os
 from datetime import datetime
-
+from src.customer_churn.exception.exception import CustomerChurnException
+import sys
 
 # Create the format for the log folder and file:
 LOG_FILE = f"{datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.log"
@@ -25,16 +26,26 @@ logging.basicConfig(
 
 
 # A function to separate the logs based on the provided section names:
-def log_separator(section_name=""):
+def log_separator(section_name, stage):
     """
     This function creates a separator lines for different logs for ease of visual understanding:
     """
-    separator_line = "-" * 100
-    logging.info(f"{separator_line}")
-    if section_name:
-        logging.info(f"START OF: {section_name.upper()}")
-        logging.info(f"{separator_line}")
-
+    separator_line = "-" * 100  
+    try:
+        if section_name and stage:
+            if stage.lower() == 'start':
+                logging.info(f"{separator_line}")
+                logging.info(f"{stage.upper()} OF: {section_name.upper()}")
+                logging.info(f"{separator_line}\n")
+            elif stage.lower() == 'end':
+                logging.info(f"{separator_line}")
+                logging.info(f"{stage.upper()} OF: {section_name.upper()}")
+                logging.info(f"{separator_line}\n\n\n")
+            else:
+                error_message = "Please define the stage name from one of these options: [start or End]"
+                raise CustomerChurnException(error_message, sys)
+    except Exception as e:
+        raise CustomerChurnException(e, sys)
 
 
 

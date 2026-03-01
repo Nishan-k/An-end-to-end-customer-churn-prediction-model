@@ -32,3 +32,16 @@ def write_yaml_file(file_path:str, content:object, replace:bool=False) -> None:
             yaml.dump(content, file)
     except Exception as e:
         raise CustomerChurnException(e, sys)
+
+
+# 3. Read the parquet file and return as df:
+def read_parquet_file(file_path: str) -> pd.DataFrame:
+    """
+    Takes in the file path of parquet file, reads it and returns a DF:
+    """
+    try:
+        df = pd.read_parquet(file_path)
+        return df
+    except Exception as e:
+        raise CustomerChurnException(e, sys)
+    

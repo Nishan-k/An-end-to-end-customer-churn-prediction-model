@@ -1,0 +1,9 @@
+[2026-03-01 15:32:54,605] 14 root - INFO - Reading YAML file from the path: data_schema\schema.yaml
+[2026-03-01 15:32:54,607] 118 root - INFO - Data Validation Pipeline Started:
+[2026-03-01 15:32:54,607] 47 root - INFO - Column length validation success!
+[2026-03-01 15:32:54,607] 47 root - INFO - Column length validation success!
+[2026-03-01 15:32:54,609] 70 root - INFO - Data types validation success!
+[2026-03-01 15:32:54,609] 70 root - INFO - Data types validation success!
+[2026-03-01 15:32:55,176] 136 root - INFO - Data Validation Completed | Total Execution Time: 0.009 min.
+[2026-03-01 15:32:55,176] 137 root - INFO - Data Validation Artifacts:
+DataValidationArtifacts(validation_status=True, valid_train_file_path='Artifacts\\data_validation\\valid\\train.parquet', valid_test_file_path='Artifacts\\data_validation\\valid\\test.parquet', invalid_train_file_path='None', invalid_test_file_path='None', drift_report_file_path='None')

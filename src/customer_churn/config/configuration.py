@@ -46,4 +46,5 @@ class DataValidationConfig:
                                                          training_pipeline.TRAIN_FILE_NAME)
         self.invalid_test_file_path: str = os.path.join(self.invalid_dir,
                                                         training_pipeline.TEST_FILE_NAME)
+        self.schema_file_path: str = training_pipeline.SCHEMA_FILE_PATH
         
