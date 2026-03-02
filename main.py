@@ -13,7 +13,7 @@ if __name__ == "__main__":
     # 2. Create an object for DataIngestionConfig():
     data_ingestion_config = DataIngestionConfig()
     log_separator(section_name="Data Ingsetion", stage="Start")
-    data_ingestion = DataIngestion(data_ingestion_config=data_ingestion_config)    
+    data_ingestion = DataIngestion(data_ingestion_config=data_ingestion_config, cut_off_date='2011-03-31')    
     data_ingestion_artifacts = data_ingestion.initiate_data_ingestion()
     log_separator(section_name="Data Ingsetion", stage="End")
 

@@ -23,7 +23,7 @@ DATA_INGESTION_DIR_NAME: str = "data_ingestion"
 DATA_INGESTION_INGESTED_DIR: str = "ingested"
 DATA_INGESTION_FEATURE_STOR_DIR: str = "feature_store"
 DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO: float = 0.2
-
+DATA_INGESTION_CHURN_THRESHOLD_DATE_2010:str = '2011-03-31'
 
 ############################################
 # Constant variables for the Data Validation:

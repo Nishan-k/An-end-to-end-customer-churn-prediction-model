@@ -1,0 +1,42 @@
+[2026-03-02 14:36:33,774] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-02 14:36:33,774] 38 root - INFO - START OF: DATA INGSETION
+[2026-03-02 14:36:33,775] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+
+[2026-03-02 14:36:33,775] 120 root - INFO - Data Ingestion Pipeline Started:
+[2026-03-02 14:37:23,814] 51 root - INFO - RAW data shape: (1067371, 9) pulled from MongoDB.
+[2026-03-02 14:37:24,158] 57 root - INFO - Total number of dropped rows: 243,007 or 22.77% with missing Customer ID
+[2026-03-02 14:37:24,525] 68 root - INFO - Cut-off date: 2011-03-31 | Before: 824,364 samples | After: 513,367 sampples. 
+[2026-03-02 14:37:25,093] 74 root - INFO - Data Import From MongoDB As DataFrame Success | Records: 513,367
+[2026-03-02 14:37:25,728] 91 root - INFO - Dataframe saved as Parquet file in feature store in the path: Artifacts\data_ingestion\feature_store as a backup file.
+[2026-03-02 14:37:26,055] 104 root - INFO - Train-test split completed | Training: (410693, 8) (80.0%)  and Test: (102674, 8) (20.0%).
+[2026-03-02 14:37:26,678] 109 root - INFO - Exporting train and test data as Parquet completed.
+[2026-03-02 14:37:26,743] 135 root - INFO - Data Ingestion Artifacts:
+DataIngestionArtifacts(training_file_path='Artifacts\\data_ingestion\\ingested\\train.parquet', test_file_path='Artifacts\\data_ingestion\\ingested\\test.parquet')
+
+[2026-03-02 14:37:26,743] 136 root - INFO - Data Ingestion Completed | Total Execution Time: 0.883 min.
+[2026-03-02 14:37:26,942] 41 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-02 14:37:26,942] 42 root - INFO - END OF: DATA INGSETION
+[2026-03-02 14:37:26,942] 43 root - INFO - ----------------------------------------------------------------------------------------------------
+
+
+
+[2026-03-02 14:37:26,942] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-02 14:37:26,942] 38 root - INFO - START OF: DATA VALIDATION
+[2026-03-02 14:37:26,942] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+
+[2026-03-02 14:37:26,942] 14 root - INFO - Reading YAML file from the path: data_schema\schema.yaml
+[2026-03-02 14:37:26,945] 113 root - INFO - Data Validation Pipeline Started:
+[2026-03-02 14:37:27,155] 44 root - INFO - Training dataframe: Column length validation success!
+[2026-03-02 14:37:27,155] 44 root - INFO - Testing dataframe: Column length validation success!
+[2026-03-02 14:37:27,155] 65 root - INFO - Training dataframe: Data types validation success!
+[2026-03-02 14:37:27,155] 65 root - INFO - Testing dataframe: Data types validation success!
+[2026-03-02 14:37:27,507] 134 root - INFO - Data Validation Artifacts:
+DataValidationArtifacts(validation_status=True, valid_train_file_path='Artifacts\\data_validation\\valid\\train.parquet', valid_test_file_path='Artifacts\\data_validation\\valid\\test.parquet', invalid_train_file_path=None, invalid_test_file_path=None, drift_report_file_path=None)
+
+[2026-03-02 14:37:27,507] 135 root - INFO - Data Validation Completed | Total Execution Time: 0.009 min.
+[2026-03-02 14:37:27,507] 41 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-02 14:37:27,507] 42 root - INFO - END OF: DATA VALIDATION
+[2026-03-02 14:37:27,507] 43 root - INFO - ----------------------------------------------------------------------------------------------------
+
+
+

@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 from dotenv import load_dotenv
 import time
 import os
-
+from typing import Optional
 
 
 # Load .env values:
@@ -21,9 +21,16 @@ MONGO_DB_URL = os.getenv("MONGO_DB_URL")
 # Create a class for the Data Ingestion Process:
 
 class DataIngestion:
-    def __init__(self, data_ingestion_config: DataIngestionConfig):
+    def __init__(self, data_ingestion_config: DataIngestionConfig, cut_off_date: str):
+        """
+        Parameters:
+        ===========
+        data_ingestion_config: An object of DataIngestionConfig class.
+        cut_off_date: samples to be dropped which are outside the observation and churn window.
+        """
         try:
             self.data_ingestion_config = data_ingestion_config
+            self.cut_off_date_dt = pd.to_datetime(cut_off_date)
         except Exception as e:
             raise CustomerChurnException(e, sys)
         
@@ -47,19 +54,26 @@ class DataIngestion:
             initial_count = len(raw_df)
             df = raw_df.dropna(subset=['Customer ID']).copy()
             dropped = initial_count - len(df)
-            logging.info(f"Tota number of dropped rows: {dropped} or {(dropped/initial_count)*100:.2f}% with missing Customer ID")
+            logging.info(f"Total number of dropped rows: {dropped:,} or {(dropped/initial_count)*100:.2f}% with missing Customer ID")
 
             # Necessary data-types changes:
             df['InvoiceDate'] = pd.to_datetime(df['InvoiceDate'], unit='ms')
-            df['Customer ID'] = df['Customer ID'].astype('int64')
-            
+            df['Customer ID'] = df['Customer ID'].astype('str')
+
+            # Drop the indexes outside the Observation and churn window:
+            indexes_to_drop = df[df['InvoiceDate'] > self.cut_off_date_dt].index
+            before_cutoff = df.shape[0]
+            df.drop(index=indexes_to_drop, inplace=True)
+            after_cutoff = df.shape[0]
+            logging.info(f"Cut-off date: {self.cut_off_date_dt} | Before: {before_cutoff:,} samples | After: {after_cutoff:,} sampples. ")
+            df.reset_index(drop=True, inplace=True)
 
             if "_id" in df.columns.to_list():
                 df = df.drop(columns=["_id"])
 
             df.replace({"na": np.nan}, inplace=True)
             logging.info(
-                f"Data Import From MongoDB As DataFrame Success | Records: {df.shape[0]:,}")
+                f"Data Import From MongoDB As DataFrame Success | Records: {df.shape[0]:,} & Features: {df.shape[1]}")
             return df
         except Exception as e:
             raise CustomerChurnException(e, sys)
@@ -71,6 +85,7 @@ class DataIngestion:
         """
         try:
             feature_store_file_path = self.data_ingestion_config.feature_store_file_path
+
             # Create the folder:
             dir_path = os.path.dirname(feature_store_file_path)
             os.makedirs(dir_path, exist_ok=True)
@@ -88,7 +103,7 @@ class DataIngestion:
         try:
             split_ratio = self.data_ingestion_config.train_test_split_ratio
             train_set, test_set = train_test_split(dataframe, test_size=split_ratio)
-            logging.info(f"Train-test split completed | Training: {(1-split_ratio) * 100}% and Test: {split_ratio * 100}%")
+            logging.info(f"Train-test split completed | Training: {train_set.shape} ({(1-split_ratio) * 100}%)  and Test: {test_set.shape} ({split_ratio * 100}%).")
             dir_path = os.path.dirname(self.data_ingestion_config.training_file_path)
             os.makedirs(dir_path, exist_ok=True)
             train_set.to_parquet(self.data_ingestion_config.training_file_path, index=False)

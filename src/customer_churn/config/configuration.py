@@ -26,6 +26,7 @@ class DataIngestionConfig:
         self.train_test_split_ratio: float = training_pipeline.DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO
         self.collection_name: str = training_pipeline.DATA_INGESTION_COLLECION_NAME
         self.database_name: str = training_pipeline.DATA_INGESTION_DATABASE_NAME
+        self.churn_data_threshold:str = training_pipeline.DATA_INGESTION_CHURN_THRESHOLD_DATE_2010
 
 
 # Data Validation Config:
