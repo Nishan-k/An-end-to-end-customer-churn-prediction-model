@@ -44,4 +44,5 @@ def read_parquet_file(file_path: str) -> pd.DataFrame:
         return df
     except Exception as e:
         raise CustomerChurnException(e, sys)
-    
+
+

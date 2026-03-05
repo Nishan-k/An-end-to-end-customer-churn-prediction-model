@@ -49,3 +49,22 @@ class DataValidationConfig:
                                                         training_pipeline.TEST_FILE_NAME)
         self.schema_file_path: str = training_pipeline.SCHEMA_FILE_PATH
         
+
+# Data Clearning Artifacts:
+class DataCleaningConfig:
+    def __init__(self):
+        self.data_cleaning_dir: str = os.path.join(training_pipeline.ARTIFACT_DIR,
+                                                   training_pipeline.DATA_CLEANING_DIR_NAME)
+        self.clipped_dir: str = os.path.join(self.data_cleaning_dir, training_pipeline.DATA_CLEANING_CLIPPED_DATA)
+        self.clipped_train_file_path: str = os.path.join(self.clipped_dir, training_pipeline.TRAIN_FILE_NAME)
+        self.clipped_test_file_path: str = os.path.join(self.clipped_dir, training_pipeline.TEST_FILE_NAME)
+
+        self.unclipped_dir: str = os.path.join(self.data_cleaning_dir, training_pipeline.DATA_CLEANING_UNCLIPPED_DATA)        
+        self.unclipped_train_file_path: str = os.path.join(self.unclipped_dir, training_pipeline.TRAIN_FILE_NAME)
+        self.unclipped_test_file_path: str = os.path.join(self.unclipped_dir, training_pipeline.TEST_FILE_NAME)
+
+        self.missing_data_imputer: str = os.path.join(self.data_cleaning_dir, training_pipeline.DATA_CLEANING_IMPUTER_FOR_MISSING_DATA)
+        self.missing_data_imputer_file: str = os.path.join(self.missing_data_imputer, training_pipeline.DATA_CLEANING_IMPUTER_FILE_NAME)
+
+        self.caps_yaml_file: str = os.path.join(self.data_cleaning_dir, training_pipeline.DATA_CLEANING_CAPS_FILE)
+        

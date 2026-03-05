@@ -37,6 +37,7 @@ class LoadRetailData:
         df['Invoice'] = df['Invoice'].astype('str')
         df['StockCode'] = df['StockCode'].astype('str')
         df['Description'] = df['Description'].astype('str')
+        df['Price'] = df['Price'].replace(0.0, np.nan)
         
      
 

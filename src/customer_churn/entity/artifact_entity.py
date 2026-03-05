@@ -16,4 +16,14 @@ class DataValidationArtifacts:
     invalid_train_file_path: Optional[str] = None
     invalid_test_file_path: Optional[str] = None
     drift_report_file_path: Optional[str] = None
-    
+
+
+# 3. Data Cleaning Artifacts:
+@dataclass
+class DataCleaningArtifacts:
+    clipped_training_file_path: Optional[str] = None
+    clipped_testing_file_path: Optional[str] = None
+    unclipped_training_file_path: Optional[str] = None
+    unclipped_testing_file_path: Optional[str] = None
+    simple_imputer_file_path: Optional[str] = None
+    caps_file_path_yaml: Optional[str] = None

@@ -34,3 +34,13 @@ DATA_VALIDATION_INVALID_DIR: str = "invalid"
 DATA_VALIDATION_DRFIT_REPORT_DIR: str = "drift_report"
 DATA_VALIDATION_DRFIT_REPORT_FILE_NAME: str = "report.yaml"
 
+
+############################################
+# Constant variables for the Data Cleaning:
+############################################
+DATA_CLEANING_DIR_NAME: str = "data_cleaning"
+DATA_CLEANING_CLIPPED_DATA: str = "data_clipped"
+DATA_CLEANING_UNCLIPPED_DATA: str = "data_unclipped"
+DATA_CLEANING_IMPUTER_FOR_MISSING_DATA: str = "missing_data_imputer"
+DATA_CLEANING_IMPUTER_FILE_NAME: str = "SimpleImputerForPrice.joblib"
+DATA_CLEANING_CAPS_FILE: str = "caps.yaml"
