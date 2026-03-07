@@ -1,0 +1,11 @@
+[2026-03-07 10:32:10,766] 14 root - INFO - Reading YAML file from the path: params.yaml
+[2026-03-07 10:32:10,767] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-07 10:32:10,767] 38 root - INFO - START OF: DATA CLEANING: TESTING DATA
+[2026-03-07 10:32:10,767] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+
+[2026-03-07 10:32:10,767] 206 root - INFO - Cleaning Testing Data Pipeline Started:
+[2026-03-07 10:32:10,858] 210 root - INFO - Reading testing data success!!
+[2026-03-07 10:32:10,956] 37 root - INFO - Total number of duplicates in the given testing dataframe: 984 were dropped.
+[2026-03-07 10:32:10,958] 212 root - INFO - Duplicates removed in the testing data.
+[2026-03-07 10:32:10,971] 90 root - INFO - testing has no missing(nan) values.
+[2026-03-07 10:32:10,971] 218 root - INFO - Testing data has no missing values (NaN)

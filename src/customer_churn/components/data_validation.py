@@ -130,9 +130,9 @@ class DataValidation:
                 data_validation_artifacts = self.get_artifacts(data_valid_status=False)
             ending_time = time.perf_counter()
             execution_time = round((ending_time - starting_time)/60, 3)    
-            
             logging.info(f"Data Validation Artifacts:\n{data_validation_artifacts}\n")
             logging.info(f"Data Validation Completed | Total Execution Time: {execution_time} min.")
+            return data_validation_artifacts
                      
         except Exception as e:
             raise CustomerChurnException(e, sys)

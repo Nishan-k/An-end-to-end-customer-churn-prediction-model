@@ -1,25 +1,25 @@
 columns:
-  - name: Invoice
+  - name: invoice
     dtype: object
     nullable: false
-  - name: StockCode
+  - name: stockcode
     dtype: object
     nullable: false
-  - name: Description
+  - name: description
     dtype: object
     nullable: true
-  - name: Quantity
+  - name: quantity
     dtype: int64
     nullable: false
-  - name: InvoiceDate
+  - name: invoicedate
     dtype: datetime64[ns]
     nullable: false
-  - name: Price
+  - name: price
     dtype: float64
     nullable: false
-  - name: Customer ID
+  - name: customerid
     dtype: int64         
     nullable: false
-  - name: Country
+  - name: country
     dtype: object
     nullable: true

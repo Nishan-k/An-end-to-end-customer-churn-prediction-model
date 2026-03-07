@@ -46,3 +46,20 @@ def read_parquet_file(file_path: str) -> pd.DataFrame:
         raise CustomerChurnException(e, sys)
 
 
+
+
+# 4. Standardize the column names:
+def standardize_column_names(df:pd.DataFrame) -> pd.DataFrame:
+    """
+    Rename the column names to match the defined schema for data validation(lower-case and no spaces)
+    Returns a new dataframe with the renamed column names
+    """
+    column_mapping = {'Invoice': 'invoice', 
+                      'StockCode':'stockcode', 
+                      'Description':'description',
+                      'Quantity':'quantity', 
+                      'InvoiceDate':'invoicedate', 
+                      'Price':'price',
+                      'Customer ID':'customerid', 
+                      'Country':'country'}
+    return df.rename(columns=column_mapping)

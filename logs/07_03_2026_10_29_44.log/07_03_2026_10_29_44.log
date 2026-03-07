@@ -1,0 +1,28 @@
+[2026-03-07 10:29:44,388] 14 root - INFO - Reading YAML file from the path: params.yaml
+[2026-03-07 10:29:44,389] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-07 10:29:44,389] 38 root - INFO - START OF: DATA CLEANING: TRAINING DATA
+[2026-03-07 10:29:44,389] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+
+[2026-03-07 10:29:44,389] 152 root - INFO - Cleaning Training Data Pipeline Started:
+[2026-03-07 10:29:44,560] 156 root - INFO - Reading training data success!
+[2026-03-07 10:29:45,002] 37 root - INFO - Total number of duplicates in the given training dataframe: 14,529 were dropped.
+[2026-03-07 10:29:45,003] 158 root - INFO - Duplicates handled in the training data.
+[2026-03-07 10:29:45,055] 90 root - INFO - training has no missing(nan) values.
+[2026-03-07 10:29:45,096] 60 root - INFO - SimpleImputer used median as strategy and saved the imputer at: Artifacts\data_cleaning\missing_data_imputer\SimpleImputerForPrice.joblib path.
+[2026-03-07 10:29:45,885] 106 root - INFO - Total number of returned orders in training dataframe: 9,588
+[2026-03-07 10:29:45,886] 107 root - INFO - Total number of cancelled orders in training dataframe: 9,588
+[2026-03-07 10:29:46,230] 176 root - INFO - Unclipped training data saved for tree models in: Artifacts\data_cleaning\data_unclipped\train.parquet
+[2026-03-07 10:29:46,241] 130 root - INFO - Clipping data from training file saved at: Artifacts\data_cleaning\caps.yaml
+[2026-03-07 10:29:46,246] 135 root - INFO - Column: Quantity_abs has been clipped by 99th quantile: 144.0
+[2026-03-07 10:29:46,251] 135 root - INFO - Column: Price has been clipped by 99th quantile: 14.95
+[2026-03-07 10:29:46,565] 183 root - INFO - Clipped training data saved for linear models in: Artifacts\data_cleaning\data_clipped\train.parquet
+[2026-03-07 10:29:46,565] 196 root - INFO - Data Cleaning Artifacts:
+DataCleaningArtifacts(clipped_training_file_path='Artifacts\\data_cleaning\\data_clipped\\train.parquet', clipped_testing_file_path=None, unclipped_training_file_path='Artifacts\\data_cleaning\\data_unclipped\\train.parquet', unclipped_testing_file_path=None, simple_imputer_file_path='Artifacts\\data_cleaning\\missing_data_imputer\\SimpleImputerForPrice.joblib', caps_file_path_yaml='Artifacts\\data_cleaning\\caps.yaml')
+
+[2026-03-07 10:29:46,565] 197 root - INFO - Cleaning Training Data Completed | Total Execution Time: 0.036 min.
+[2026-03-07 10:29:46,578] 41 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-07 10:29:46,578] 42 root - INFO - END OF: DATA CLEANING: TRAINING DATA
+[2026-03-07 10:29:46,578] 43 root - INFO - ----------------------------------------------------------------------------------------------------
+
+
+

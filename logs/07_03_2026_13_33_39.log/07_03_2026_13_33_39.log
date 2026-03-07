@@ -1,0 +1,46 @@
+[2026-03-07 13:33:41,954] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-07 13:33:41,955] 38 root - INFO - START OF: DATA INGSETION
+[2026-03-07 13:33:41,955] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+
+[2026-03-07 13:33:41,960] 122 root - INFO - Data Ingestion Pipeline Started:
+[2026-03-07 13:34:34,080] 51 root - INFO - RAW data shape: (1067371, 9) pulled from MongoDB.
+[2026-03-07 13:34:34,390] 57 root - INFO - Total number of dropped rows: 243,007 or 22.77% with missing Customer ID
+[2026-03-07 13:34:35,127] 68 root - INFO - Cut-off date: 2011-03-31 00:00:00 | Before: 824,364 samples | After: 513,367 sampples. 
+[2026-03-07 13:34:35,764] 75 root - INFO - Data Import From MongoDB As DataFrame Success | Records: 513,367 & Features: 8
+[2026-03-07 13:34:36,459] 93 root - INFO - Dataframe saved as Parquet file in feature store in the path: Artifacts\data_ingestion\feature_store as a backup file.
+[2026-03-07 13:34:36,821] 106 root - INFO - Train-test split completed | Training: (410693, 8) (80.0%)  and Test: (102674, 8) (20.0%).
+[2026-03-07 13:34:37,604] 111 root - INFO - Exporting train and test data as Parquet completed.
+[2026-03-07 13:34:37,685] 137 root - INFO - Data Ingestion Artifacts:
+DataIngestionArtifacts(training_file_path='Artifacts\\data_ingestion\\ingested\\train.parquet', test_file_path='Artifacts\\data_ingestion\\ingested\\test.parquet')
+
+[2026-03-07 13:34:37,685] 138 root - INFO - Data Ingestion Completed | Total Execution Time: 0.929 min.
+[2026-03-07 13:34:37,855] 41 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-07 13:34:37,855] 42 root - INFO - END OF: DATA INGSETION
+[2026-03-07 13:34:37,855] 43 root - INFO - ----------------------------------------------------------------------------------------------------
+
+
+
+[2026-03-07 13:34:37,855] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-07 13:34:37,856] 38 root - INFO - START OF: DATA VALIDATION
+[2026-03-07 13:34:37,856] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+
+[2026-03-07 13:34:37,856] 14 root - INFO - Reading YAML file from the path: data_schema\schema.yaml
+[2026-03-07 13:34:37,870] 113 root - INFO - Data Validation Pipeline Started:
+[2026-03-07 13:34:38,158] 44 root - INFO - Training dataframe: Column length validation success!
+[2026-03-07 13:34:38,158] 44 root - INFO - Testing dataframe: Column length validation success!
+[2026-03-07 13:34:38,159] 65 root - INFO - Training dataframe: Data types validation success!
+[2026-03-07 13:34:38,159] 65 root - INFO - Testing dataframe: Data types validation success!
+[2026-03-07 13:34:38,585] 134 root - INFO - Data Validation Artifacts:
+DataValidationArtifacts(validation_status=True, valid_train_file_path='Artifacts\\data_validation\\valid\\train.parquet', valid_test_file_path='Artifacts\\data_validation\\valid\\test.parquet', invalid_train_file_path=None, invalid_test_file_path=None, drift_report_file_path=None)
+
+[2026-03-07 13:34:38,585] 135 root - INFO - Data Validation Completed | Total Execution Time: 0.012 min.
+[2026-03-07 13:34:38,585] 41 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-07 13:34:38,585] 42 root - INFO - END OF: DATA VALIDATION
+[2026-03-07 13:34:38,585] 43 root - INFO - ----------------------------------------------------------------------------------------------------
+
+
+
+[2026-03-07 13:34:38,585] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-07 13:34:38,585] 38 root - INFO - START OF: DATA CLEANING: TRAINING DATA
+[2026-03-07 13:34:38,585] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+

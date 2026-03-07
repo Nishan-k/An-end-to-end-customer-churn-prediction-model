@@ -1,0 +1,18 @@
+[2026-03-07 10:19:59,969] 14 root - INFO - Reading YAML file from the path: params.yaml
+[2026-03-07 10:19:59,970] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-07 10:19:59,970] 38 root - INFO - START OF: DATA CLEANING: TRAINING DATA
+[2026-03-07 10:19:59,970] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+
+[2026-03-07 10:19:59,970] 150 root - INFO - Cleaning Training Data Pipeline Started:
+[2026-03-07 10:20:00,327] 154 root - INFO - Reading training data success!
+[2026-03-07 10:20:01,008] 37 root - INFO - Total number of duplicates in the given training dataframe: 14,529 were dropped.
+[2026-03-07 10:20:01,009] 156 root - INFO - Duplicates handled in the training data.
+[2026-03-07 10:20:01,062] 90 root - INFO - training has no missing(nan) values.
+[2026-03-07 10:20:01,105] 60 root - INFO - SimpleImputer used median as strategy and saved the imputer at: Artifacts\data_cleaning\missing_data_imputer\SimpleImputerForPrice.joblib path.
+[2026-03-07 10:20:01,906] 106 root - INFO - Total number of returned orders in training dataframe: 9,588
+[2026-03-07 10:20:01,907] 107 root - INFO - Total number of cancelled orders in training dataframe: 9,588
+[2026-03-07 10:20:02,276] 174 root - INFO - Unclipped training data saved for tree models in: Artifacts\data_cleaning\data_unclipped\train.parquet
+[2026-03-07 10:20:02,291] 128 root - INFO - Clipping data from training file saved at: Artifacts\data_cleaning\caps.yaml
+[2026-03-07 10:20:02,297] 133 root - INFO - Column: Quantity_abs has been clipped by 99th quantile: 144.0
+[2026-03-07 10:20:02,302] 133 root - INFO - Column: Price has been clipped by 99th quantile: 14.95
+[2026-03-07 10:20:02,638] 181 root - INFO - Clipped training data saved for linear models in: Artifacts\data_cleaning\data_clipped\train.parquet

@@ -1,0 +1,30 @@
+[2026-03-07 10:41:59,327] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-07 10:41:59,327] 38 root - INFO - START OF: DATA CLEANING: TESTING DATA
+[2026-03-07 10:41:59,327] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+
+[2026-03-07 10:41:59,327] 14 root - INFO - Reading YAML file from the path: params.yaml
+[2026-03-07 10:41:59,328] 28 root - INFO - Data cleaning parameters loaded with success:
+{'imputation_strategy': 'median', 'capping_quantiles': 0.99}
+[2026-03-07 10:41:59,328] 207 root - INFO - Cleaning Testing Data Pipeline Started:
+[2026-03-07 10:41:59,415] 211 root - INFO - Reading testing data success!!
+[2026-03-07 10:41:59,518] 38 root - INFO - Total number of duplicates in the given testing dataframe: 984 were dropped.
+[2026-03-07 10:41:59,518] 213 root - INFO - Duplicates removed in the testing data.
+[2026-03-07 10:41:59,531] 91 root - INFO - testing has no missing(nan) values.
+[2026-03-07 10:41:59,531] 219 root - INFO - Testing data has no missing values (NaN)
+[2026-03-07 10:41:59,725] 107 root - INFO - Total number of returned orders in testing dataframe: 2,372
+[2026-03-07 10:41:59,725] 108 root - INFO - Total number of cancelled orders in testing dataframe: 2,372
+[2026-03-07 10:41:59,811] 229 root - INFO - Unclipped test file saved at: Artifacts\data_cleaning\data_unclipped\test.parquet
+[2026-03-07 10:41:59,811] 14 root - INFO - Reading YAML file from the path: Artifacts\data_cleaning\caps.yaml
+[2026-03-07 10:41:59,813] 142 root - INFO - Column: Price has been clipped using 14.95
+[2026-03-07 10:41:59,814] 142 root - INFO - Column: Quantity_abs has been clipped using 144.0
+[2026-03-07 10:41:59,900] 237 root - INFO - Clipped testing data saved at: Artifacts\data_cleaning\data_clipped\test.parquet
+[2026-03-07 10:41:59,900] 249 root - INFO - Data Cleaning Artifacts:
+DataCleaningArtifacts(clipped_training_file_path=None, clipped_testing_file_path='Artifacts\\data_cleaning\\data_clipped\\test.parquet', unclipped_training_file_path=None, unclipped_testing_file_path='Artifacts\\data_cleaning\\data_unclipped\\test.parquet', simple_imputer_file_path=None, caps_file_path_yaml=None)
+
+[2026-03-07 10:41:59,900] 250 root - INFO - Cleaning Testing Data Completed | Total Execution Time: 0.01 min.
+[2026-03-07 10:41:59,904] 41 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-07 10:41:59,904] 42 root - INFO - END OF: DATA CLEANING: TESTING DATA
+[2026-03-07 10:41:59,904] 43 root - INFO - ----------------------------------------------------------------------------------------------------
+
+
+

@@ -7,6 +7,7 @@ import certifi
 import numpy as np
 import pymongo
 from src.customer_churn.logging import logger
+from src.customer_churn.utils.main_utils.common import standardize_column_names
 from src.customer_churn.exception.exception import CustomerChurnException
 
 
@@ -33,11 +34,14 @@ class LoadRetailData:
         df = pd.concat(pd.read_excel(self.file_path, sheet_name=self.sheet_names).values(),
                        ignore_index=True)
         
+        # Rename the columns for consistency:
+        df = standardize_column_names(df=df)
+        
         # Chnage the necessary dtypes:
-        df['Invoice'] = df['Invoice'].astype('str')
-        df['StockCode'] = df['StockCode'].astype('str')
-        df['Description'] = df['Description'].astype('str')
-        df['Price'] = df['Price'].replace(0.0, np.nan)
+        df['invoice'] = df['invoice'].astype('str')
+        df['stockcode'] = df['stockcode'].astype('str')
+        df['description'] = df['description'].astype('str')
+        df['price'] = df['price'].replace(0.0, np.nan)
         
      
 

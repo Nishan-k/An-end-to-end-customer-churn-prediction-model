@@ -52,20 +52,20 @@ class DataIngestion:
 
             # Drop the rows with missing Customer ID:
             initial_count = len(raw_df)
-            df = raw_df.dropna(subset=['Customer ID']).copy()
+            df = raw_df.dropna(subset=['customerid']).copy()
             dropped = initial_count - len(df)
             logging.info(f"Total number of dropped rows: {dropped:,} or {(dropped/initial_count)*100:.2f}% with missing Customer ID")
 
             # Necessary data-types changes:
-            df['InvoiceDate'] = pd.to_datetime(df['InvoiceDate'], unit='ms')
-            df['Customer ID'] = df['Customer ID'].astype('string')
+            df['invoicedate'] = pd.to_datetime(df['invoicedate'], unit='ms')
+            df['customerid'] = df['customerid'].astype('string')
 
             # Drop the indexes outside the Observation and churn window:
-            indexes_to_drop = df[df['InvoiceDate'] > self.cut_off_date_dt].index
+            indexes_to_drop = df[df['invoicedate'] > self.cut_off_date_dt].index
             before_cutoff = df.shape[0]
             df.drop(index=indexes_to_drop, inplace=True)
             after_cutoff = df.shape[0]
-            logging.info(f"Cut-off date: {self.cut_off_date_dt} | Before: {before_cutoff:,} samples | After: {after_cutoff:,} sampples. ")
+            logging.info(f"Cut-off date: {self.cut_off_date_dt} | Before: {before_cutoff:,} samples | After: {after_cutoff:,} samples. ")
             df.reset_index(drop=True, inplace=True)
 
             if "_id" in df.columns.to_list():
