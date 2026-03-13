@@ -27,3 +27,11 @@ class DataCleaningArtifacts:
     unclipped_testing_file_path: Optional[str] = None
     simple_imputer_file_path: Optional[str] = None
     caps_file_path_yaml: Optional[str] = None
+
+# 4. Feature engineering artifacts:
+@dataclass
+class FeatureEngineeringArtifacts:
+    clipped_training_file_path: Optional[str] = None
+    clipped_testing_file_path: Optional[str] = None
+    unclipped_training_file_path: Optional[str] = None
+    unclipped_testing_file_path: Optional[str] = None

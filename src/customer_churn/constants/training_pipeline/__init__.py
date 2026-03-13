@@ -44,3 +44,11 @@ DATA_CLEANING_UNCLIPPED_DATA: str = "data_unclipped"
 DATA_CLEANING_IMPUTER_FOR_MISSING_DATA: str = "missing_data_imputer"
 DATA_CLEANING_IMPUTER_FILE_NAME: str = "SimpleImputerForPrice.joblib"
 DATA_CLEANING_CAPS_FILE: str = "caps.yaml"
+
+
+################################################
+# Constant variables for the Feature Engineering:
+################################################
+FEATURE_ENGINEERING_DIR_NAME: str = "feature_engineering"
+FEATURE_ENGINEERING_CLIPPED_DIR_NAME: str = "data_clipped"
+FEATURE_ENGINEERING_UNCLIPPED_DIR_NAME: str = "data_unclipped"

@@ -26,7 +26,7 @@ class DataIngestionConfig:
         self.train_test_split_ratio: float = training_pipeline.DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO
         self.collection_name: str = training_pipeline.DATA_INGESTION_COLLECION_NAME
         self.database_name: str = training_pipeline.DATA_INGESTION_DATABASE_NAME
-        self.churn_data_threshold:str = training_pipeline.DATA_INGESTION_CHURN_THRESHOLD_DATE_2010
+        
 
 
 # Data Validation Config:
@@ -50,7 +50,7 @@ class DataValidationConfig:
         self.schema_file_path: str = training_pipeline.SCHEMA_FILE_PATH
         
 
-# Data Clearning Artifacts:
+# Data Clearning Config:
 class DataCleaningConfig:
     def __init__(self):
         self.data_cleaning_dir: str = os.path.join(training_pipeline.ARTIFACT_DIR,
@@ -68,3 +68,18 @@ class DataCleaningConfig:
 
         self.caps_yaml_file: str = os.path.join(self.data_cleaning_dir, training_pipeline.DATA_CLEANING_CAPS_FILE)
         
+
+# Feature Engineering Config:        
+class FeatureEngineeringConfig:
+    def __init__(self):
+        self.feature_engineer_dir: str = os.path.join(training_pipeline.ARTIFACT_DIR,
+                                                      training_pipeline.FEATURE_ENGINEERING_DIR_NAME)
+        self.clipped_dir: str = os.path.join(self.feature_engineer_dir, training_pipeline.FEATURE_ENGINEERING_CLIPPED_DIR_NAME)
+        self.clipped_train_file_path: str = os.path.join(self.clipped_dir, training_pipeline.TRAIN_FILE_NAME)
+        self.clipped_test_file_path: str = os.path.join(self.clipped_dir, training_pipeline.TEST_FILE_NAME)
+
+        self.unclipped_dir: str = os.path.join(self.feature_engineer_dir, training_pipeline.FEATURE_ENGINEERING_UNCLIPPED_DIR_NAME)
+        self.unclipped_train_file_path: str = os.path.join(self.unclipped_dir, training_pipeline.TRAIN_FILE_NAME)
+        self.unclipped_test_file_path: str = os.path.join(self.unclipped_dir, training_pipeline.TEST_FILE_NAME)
+
+

@@ -94,18 +94,16 @@ class DataCleaning:
             raise CustomerChurnException(e, sys)
         
 
-    def handle_rtrn_quantity_and_cncled_orders(self, df:pd.DataFrame, df_name:str) -> pd.DataFrame:
+    def handle_cancelled_orders(self, df:pd.DataFrame, df_name:str) -> pd.DataFrame:
         """
         For returned orders flag 1 else 0
         For cancelled orders flag 1 else 0
         Creates a new column "Quantity_abs" with absolute values for Quantity column for feature selection in later stage.
         """
         try:
-            df['orders_returned'] = [1 if q < 0  else 0 for q in df['quantity']]
-            df['orders_cancelled'] = [1 if invoice.startswith('C') else 0 for invoice in df['invoice']]
+            df['order_issue'] = ((df['quantity'] < 0) | (df['invoice'].str.startswith('C'))).astype(int)
             df['quantity_abs'] = df['quantity'].map(lambda q: np.abs(q))
-            logging.info(f"Total number of returned orders in {df_name} dataframe: {df['orders_returned'].sum():,}")
-            logging.info(f"Total number of cancelled orders in {df_name} dataframe: {df['orders_cancelled'].sum():,}")
+            logging.info(f"Total number of cancelled orders in {df_name} dataframe: {df['order_issue'].sum():,}")
             return df
         except Exception as e:
             raise CustomerChurnException(e, sys)
@@ -164,9 +162,9 @@ class DataCleaning:
             imputer_path = self.fit_price_imputer(train_df=train_df_duplicates_removed)
             if data_missing:
                 missing_data_imputed_df = self.transform_price_imputer(df=train_df_duplicates_removed, df_name='training')
-                clean_df = self.handle_rtrn_quantity_and_cncled_orders(df=missing_data_imputed_df, df_name='training')
+                clean_df = self.handle_cancelled_orders(df=missing_data_imputed_df, df_name='training')
             else:
-                clean_df = self.handle_rtrn_quantity_and_cncled_orders(df=train_df_duplicates_removed, df_name='training')
+                clean_df = self.handle_cancelled_orders(df=train_df_duplicates_removed, df_name='training')
                 
             # Create a copy of the dataframe for linear and non-linear models:
             unclipped_df = clean_df.copy()
@@ -197,6 +195,7 @@ class DataCleaning:
             execution_time = round((ending_time - starting_time)/60, 3)
             logging.info(f"Data Cleaning Artifacts:\n{data_cleaning_training_df_artifacts}\n")
             logging.info(f"Cleaning Training Data Completed | Total Execution Time: {execution_time} min.")
+            return data_cleaning_training_df_artifacts
         except Exception as e:
             raise CustomerChurnException(e, sys)
         
@@ -215,10 +214,10 @@ class DataCleaning:
             has_missing_price = self.report_missing_values(df=test_df_duplicates_removed, df_name='testing')
             if has_missing_price:
                 missing_data_imputed_df = self.transform_price_imputer(df=test_df_duplicates_removed, df_name='testing')
-                clean_df = self.handle_rtrn_quantity_and_cncled_orders(df=missing_data_imputed_df, df_name='testing')
+                clean_df = self.handle_cancelled_orders(df=missing_data_imputed_df, df_name='testing')
             else:
                 logging.info("Testing data has no missing values (NaN)")
-                clean_df = self.handle_rtrn_quantity_and_cncled_orders(df=test_df_duplicates_removed,  df_name='testing')
+                clean_df = self.handle_cancelled_orders(df=test_df_duplicates_removed,  df_name='testing')
 
             # Create a copy of the dataframe for linear and non-linear model:
             unclipped_df = clean_df.copy()
@@ -249,6 +248,7 @@ class DataCleaning:
             execution_time = round((ending_time - starting_time)/60, 3)
             logging.info(f"Data Cleaning Artifacts:\n{data_cleaning_testing_df_artifacts}\n")
             logging.info(f"Cleaning Testing Data Completed | Total Execution Time: {execution_time} min.")
+            return data_cleaning_testing_df_artifacts
         except Exception as e:
             raise CustomerChurnException(e, sys)
             
