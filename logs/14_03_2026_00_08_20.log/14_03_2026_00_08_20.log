@@ -1,0 +1,249 @@
+[2026-03-14 00:08:21,949] 14 root - INFO - Reading YAML file from the path: params.yaml
+[2026-03-14 00:08:21,950] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-14 00:08:21,950] 38 root - INFO - START OF: DATA INGSETION
+[2026-03-14 00:08:21,950] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+
+[2026-03-14 00:08:21,952] 122 root - INFO - Data Ingestion Pipeline Started:
+[2026-03-14 00:09:11,968] 51 root - INFO - RAW data shape: (1067371, 9) pulled from MongoDB.
+[2026-03-14 00:09:12,286] 57 root - INFO - Total number of dropped rows: 243,007 or 22.77% with missing Customer ID
+[2026-03-14 00:09:13,055] 68 root - INFO - Cut-off date: 2011-03-31 00:00:00 | Before: 824,364 samples | After: 513,367 samples. 
+[2026-03-14 00:09:13,686] 75 root - INFO - Data Import From MongoDB As DataFrame Success | Records: 513,367 & Features: 8
+[2026-03-14 00:09:14,388] 93 root - INFO - Dataframe saved as Parquet file in feature store in the path: Artifacts\data_ingestion\feature_store as a backup file.
+[2026-03-14 00:09:14,751] 106 root - INFO - Train-test split completed | Training: (410693, 8) (80.0%)  and Test: (102674, 8) (20.0%).
+[2026-03-14 00:09:15,534] 111 root - INFO - Exporting train and test data as Parquet completed.
+[2026-03-14 00:09:15,613] 137 root - INFO - Data Ingestion Artifacts:
+DataIngestionArtifacts(training_file_path='Artifacts\\data_ingestion\\ingested\\train.parquet', test_file_path='Artifacts\\data_ingestion\\ingested\\test.parquet')
+
+[2026-03-14 00:09:15,613] 138 root - INFO - Data Ingestion Completed | Total Execution Time: 0.894 min.
+[2026-03-14 00:09:15,784] 41 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-14 00:09:15,784] 42 root - INFO - END OF: DATA INGSETION
+[2026-03-14 00:09:15,784] 43 root - INFO - ----------------------------------------------------------------------------------------------------
+
+
+
+[2026-03-14 00:09:15,784] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-14 00:09:15,784] 38 root - INFO - START OF: DATA VALIDATION
+[2026-03-14 00:09:15,784] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+
+[2026-03-14 00:09:15,784] 14 root - INFO - Reading YAML file from the path: data_schema\schema.yaml
+[2026-03-14 00:09:15,788] 113 root - INFO - Data Validation Pipeline Started:
+[2026-03-14 00:09:16,042] 44 root - INFO - Training dataframe: Column length validation success!
+[2026-03-14 00:09:16,042] 44 root - INFO - Testing dataframe: Column length validation success!
+[2026-03-14 00:09:16,043] 65 root - INFO - Training dataframe: Data types validation success!
+[2026-03-14 00:09:16,043] 65 root - INFO - Testing dataframe: Data types validation success!
+[2026-03-14 00:09:16,469] 133 root - INFO - Data Validation Artifacts:
+DataValidationArtifacts(validation_status=True, valid_train_file_path='Artifacts\\data_validation\\valid\\train.parquet', valid_test_file_path='Artifacts\\data_validation\\valid\\test.parquet', invalid_train_file_path=None, invalid_test_file_path=None, drift_report_file_path=None)
+
+[2026-03-14 00:09:16,469] 134 root - INFO - Data Validation Completed | Total Execution Time: 0.011 min.
+[2026-03-14 00:09:16,469] 41 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-14 00:09:16,470] 42 root - INFO - END OF: DATA VALIDATION
+[2026-03-14 00:09:16,470] 43 root - INFO - ----------------------------------------------------------------------------------------------------
+
+
+
+[2026-03-14 00:09:16,470] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-14 00:09:16,470] 38 root - INFO - START OF: DATA CLEANING: TRAINING DATA
+[2026-03-14 00:09:16,470] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+
+[2026-03-14 00:09:16,470] 14 root - INFO - Reading YAML file from the path: params.yaml
+[2026-03-14 00:09:16,471] 28 root - INFO - Data cleaning parameters loaded with success: {'imputation_strategy': 'median', 'capping_quantiles': 0.99}
+[2026-03-14 00:09:16,471] 152 root - INFO - Cleaning Training Data Pipeline Started:
+[2026-03-14 00:09:16,629] 156 root - INFO - Reading training data success!
+[2026-03-14 00:09:17,119] 38 root - INFO - Total number of duplicates in the given training dataframe: 14,567 were dropped.
+[2026-03-14 00:09:17,119] 158 root - INFO - Duplicates handled in the training data.
+[2026-03-14 00:09:17,188] 88 root - INFO - training dataframe missing value report:
+invoice         0
+stockcode       0
+description     0
+quantity        0
+invoicedate     0
+price          35
+customerid      0
+country         0
+dtype: int64
+[2026-03-14 00:09:17,228] 61 root - INFO - SimpleImputer used median as strategy and saved the imputer at: Artifacts\data_cleaning\missing_data_imputer\SimpleImputerForPrice.joblib path.
+[2026-03-14 00:09:17,230] 74 root - INFO - Imputer loading Success from Artifacts\data_cleaning\missing_data_imputer\SimpleImputerForPrice.joblib
+[2026-03-14 00:09:17,238] 76 root - INFO - Dataframe: training on column Price, imputation success!
+[2026-03-14 00:09:17,764] 106 root - INFO - Total number of cancelled orders in training dataframe: 9,598
+[2026-03-14 00:09:18,124] 176 root - INFO - Unclipped training data saved for tree models in: Artifacts\data_cleaning\data_unclipped\train.parquet
+[2026-03-14 00:09:18,136] 124 root - INFO - Clipping values calculated on training data: {'quantity_abs': 144.0, 'price': 14.95}
+[2026-03-14 00:09:18,137] 130 root - INFO - Clipping data from training file saved at: Artifacts\data_cleaning\caps.yaml
+[2026-03-14 00:09:18,141] 135 root - INFO - Column: quantity_abs has been clipped by 99th quantile: 144.0
+[2026-03-14 00:09:18,145] 135 root - INFO - Column: price has been clipped by 99th quantile: 14.95
+[2026-03-14 00:09:18,528] 183 root - INFO - Clipped training data saved for linear models in: Artifacts\data_cleaning\data_clipped\train.parquet
+[2026-03-14 00:09:18,528] 196 root - INFO - Data Cleaning Artifacts:
+DataCleaningArtifacts(clipped_training_file_path='Artifacts\\data_cleaning\\data_clipped\\train.parquet', clipped_testing_file_path=None, unclipped_training_file_path='Artifacts\\data_cleaning\\data_unclipped\\train.parquet', unclipped_testing_file_path=None, simple_imputer_file_path='Artifacts\\data_cleaning\\missing_data_imputer\\SimpleImputerForPrice.joblib', caps_file_path_yaml='Artifacts\\data_cleaning\\caps.yaml')
+
+[2026-03-14 00:09:18,528] 197 root - INFO - Cleaning Training Data Completed | Total Execution Time: 0.034 min.
+[2026-03-14 00:09:18,552] 41 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-14 00:09:18,552] 42 root - INFO - END OF: DATA CLEANING: TRAINING DATA
+[2026-03-14 00:09:18,552] 43 root - INFO - ----------------------------------------------------------------------------------------------------
+
+
+
+[2026-03-14 00:09:18,552] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-14 00:09:18,552] 38 root - INFO - START OF: DATA CLEANING: TESTING DATA
+[2026-03-14 00:09:18,552] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+
+[2026-03-14 00:09:18,552] 14 root - INFO - Reading YAML file from the path: params.yaml
+[2026-03-14 00:09:18,554] 28 root - INFO - Data cleaning parameters loaded with success: {'imputation_strategy': 'median', 'capping_quantiles': 0.99}
+[2026-03-14 00:09:18,554] 207 root - INFO - Cleaning Testing Data Pipeline Started:
+[2026-03-14 00:09:18,611] 211 root - INFO - Reading testing data success!!
+[2026-03-14 00:09:18,734] 38 root - INFO - Total number of duplicates in the given testing dataframe: 942 were dropped.
+[2026-03-14 00:09:18,734] 213 root - INFO - Duplicates removed in the testing data.
+[2026-03-14 00:09:18,753] 88 root - INFO - testing dataframe missing value report:
+invoice        0
+stockcode      0
+description    0
+quantity       0
+invoicedate    0
+price          5
+customerid     0
+country        0
+dtype: int64
+[2026-03-14 00:09:18,754] 74 root - INFO - Imputer loading Success from Artifacts\data_cleaning\missing_data_imputer\SimpleImputerForPrice.joblib
+[2026-03-14 00:09:18,756] 76 root - INFO - Dataframe: testing on column Price, imputation success!
+[2026-03-14 00:09:18,903] 106 root - INFO - Total number of cancelled orders in testing dataframe: 2,378
+[2026-03-14 00:09:19,008] 229 root - INFO - Unclipped test file saved at: Artifacts\data_cleaning\data_unclipped\test.parquet
+[2026-03-14 00:09:19,009] 14 root - INFO - Reading YAML file from the path: Artifacts\data_cleaning\caps.yaml
+[2026-03-14 00:09:19,012] 141 root - INFO - Column: price has been clipped using 14.95
+[2026-03-14 00:09:19,013] 141 root - INFO - Column: quantity_abs has been clipped using 144.0
+[2026-03-14 00:09:19,122] 237 root - INFO - Clipped testing data saved at: Artifacts\data_cleaning\data_clipped\test.parquet
+[2026-03-14 00:09:19,122] 249 root - INFO - Data Cleaning Artifacts:
+DataCleaningArtifacts(clipped_training_file_path=None, clipped_testing_file_path='Artifacts\\data_cleaning\\data_clipped\\test.parquet', unclipped_training_file_path=None, unclipped_testing_file_path='Artifacts\\data_cleaning\\data_unclipped\\test.parquet', simple_imputer_file_path=None, caps_file_path_yaml=None)
+
+[2026-03-14 00:09:19,122] 250 root - INFO - Cleaning Testing Data Completed | Total Execution Time: 0.009 min.
+[2026-03-14 00:09:19,129] 41 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-14 00:09:19,129] 42 root - INFO - END OF: DATA CLEANING: TESTING DATA
+[2026-03-14 00:09:19,129] 43 root - INFO - ----------------------------------------------------------------------------------------------------
+
+
+
+[2026-03-14 00:09:19,129] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-14 00:09:19,129] 38 root - INFO - START OF: FEATURE ENGINEERING
+[2026-03-14 00:09:19,129] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+
+[2026-03-14 00:09:19,130] 27 root - INFO - FeatureEngineering Class initialization success!
+[2026-03-14 00:09:19,130] 250 root - INFO - Feature engineering pipeline started, given branch name: clipped
+[2026-03-14 00:09:19,346] 263 root - INFO - Reading clipped training and testing data completed.
+[2026-03-14 00:09:19,346] 264 root - INFO - Training clipped data has a shape of: (396126, 12)
+[2026-03-14 00:09:19,346] 265 root - INFO - Testing clipped data has a shape of: (101732, 12)
+[2026-03-14 00:09:19,346] 47 root - INFO - Creating observation dataframe:
+[2026-03-14 00:09:19,407] 50 root - INFO - The shape of the observation dataframe is: (341353, 12).
+[2026-03-14 00:09:19,407] 51 root - INFO - The transactiosn in the observation window ranges between: 2009-12-01 07:45:00 : 2010-12-23 16:06:00
+[2026-03-14 00:09:19,407] 52 root - INFO - Creation of observation dataframe success!
+[2026-03-14 00:09:19,407] 47 root - INFO - Creating observation dataframe:
+[2026-03-14 00:09:19,422] 50 root - INFO - The shape of the observation dataframe is: (88057, 12).
+[2026-03-14 00:09:19,423] 51 root - INFO - The transactiosn in the observation window ranges between: 2009-12-01 07:45:00 : 2010-12-23 16:06:00
+[2026-03-14 00:09:19,423] 52 root - INFO - Creation of observation dataframe success!
+[2026-03-14 00:09:19,423] 75 root - INFO - Creating the product/stockcode level metrics:
+[2026-03-14 00:09:19,457] 77 root - INFO - There are a total of 4,009 unique products.
+[2026-03-14 00:09:19,533] 87 root - INFO - Success for creating the product/stockcode level metrics.
+[2026-03-14 00:09:19,535] 113 root - INFO - Creating the customer level risk for the products they buy.
+[2026-03-14 00:09:19,728] 126 root - INFO - Success for creating the customer level risk for the products they buy.
+[2026-03-14 00:09:19,737] 113 root - INFO - Creating the customer level risk for the products they buy.
+[2026-03-14 00:09:19,798] 126 root - INFO - Success for creating the customer level risk for the products they buy.
+[2026-03-14 00:09:19,801] 153 root - INFO - Creating the customer level aggregated metrics. Using clipped data: True
+[2026-03-14 00:09:20,964] 197 root - INFO - Success in creating the customer level aggregated metrics.
+[2026-03-14 00:09:20,972] 153 root - INFO - Creating the customer level aggregated metrics. Using clipped data: True
+[2026-03-14 00:09:21,968] 197 root - INFO - Success in creating the customer level aggregated metrics.
+[2026-03-14 00:09:21,971] 222 root - INFO - Defining the churn label:
+[2026-03-14 00:09:21,971] 223 root - INFO - The observation window will be until: 2010-12-31 00:00:00.
+[2026-03-14 00:09:21,972] 224 root - INFO - The churn window will be from: 2011-01-01 00:00:00 until:   2011-03-31 00:00:00
+[2026-03-14 00:09:21,991] 226 root - INFO - The min invoice date in churn df: 2011-01-04 10:00:00 and the max is: 2011-03-30 17:33:00
+[2026-03-14 00:09:21,999] 228 root - INFO - There are a total of: 1779 customer IDs who made the transaction in churn window.
+[2026-03-14 00:09:22,002] 230 root - INFO - The count for the churn label is:
+churn
+1    2967
+0    1414
+Name: count, dtype: int64
+[2026-03-14 00:09:22,002] 231 root - INFO - The shape of the finalized df is:(4381, 15)
+[2026-03-14 00:09:22,002] 232 root - INFO - Success at defining the churn label.
+[2026-03-14 00:09:22,004] 222 root - INFO - Defining the churn label:
+[2026-03-14 00:09:22,004] 223 root - INFO - The observation window will be until: 2010-12-31 00:00:00.
+[2026-03-14 00:09:22,004] 224 root - INFO - The churn window will be from: 2011-01-01 00:00:00 until:   2011-03-31 00:00:00
+[2026-03-14 00:09:22,008] 226 root - INFO - The min invoice date in churn df: 2011-01-04 10:00:00 and the max is: 2011-03-30 17:33:00
+[2026-03-14 00:09:22,010] 228 root - INFO - There are a total of: 1609 customer IDs who made the transaction in churn window.
+[2026-03-14 00:09:22,014] 230 root - INFO - The count for the churn label is:
+churn
+1    2864
+0    1267
+Name: count, dtype: int64
+[2026-03-14 00:09:22,014] 231 root - INFO - The shape of the finalized df is:(4131, 15)
+[2026-03-14 00:09:22,014] 232 root - INFO - Success at defining the churn label.
+[2026-03-14 00:09:22,039] 300 root - INFO - Clipped training data saved to: Artifacts\feature_engineering\data_clipped\train.parquet
+[2026-03-14 00:09:22,040] 301 root - INFO - Clipped testing data saved to: Artifacts\feature_engineering\data_clipped\test.parquet
+[2026-03-14 00:09:22,040] 322 root - INFO - Feature Engineering Artifacts:
+FeatureEngineeringArtifacts(clipped_training_file_path='Artifacts\\feature_engineering\\data_clipped\\train.parquet', clipped_testing_file_path='Artifacts\\feature_engineering\\data_clipped\\test.parquet', unclipped_training_file_path=None, unclipped_testing_file_path=None)
+
+[2026-03-14 00:09:22,040] 323 root - INFO - Feature Engineering Completed | Total Execution Time: 0.048 min.
+[2026-03-14 00:09:22,065] 41 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-14 00:09:22,065] 42 root - INFO - END OF: FEATURE ENGINEERING
+[2026-03-14 00:09:22,065] 43 root - INFO - ----------------------------------------------------------------------------------------------------
+
+
+
+[2026-03-14 00:09:22,066] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-14 00:09:22,066] 38 root - INFO - START OF: FEATURE ENGINEERING
+[2026-03-14 00:09:22,066] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+
+[2026-03-14 00:09:22,067] 27 root - INFO - FeatureEngineering Class initialization success!
+[2026-03-14 00:09:22,067] 250 root - INFO - Feature engineering pipeline started, given branch name: unclipped
+[2026-03-14 00:09:22,270] 263 root - INFO - Reading unclipped training and testing data completed.
+[2026-03-14 00:09:22,271] 264 root - INFO - Training unclipped data has a shape of: (396126, 10)
+[2026-03-14 00:09:22,271] 265 root - INFO - Testing unclipped data has a shape of: (101732, 10)
+[2026-03-14 00:09:22,271] 47 root - INFO - Creating observation dataframe:
+[2026-03-14 00:09:22,318] 50 root - INFO - The shape of the observation dataframe is: (341353, 10).
+[2026-03-14 00:09:22,318] 51 root - INFO - The transactiosn in the observation window ranges between: 2009-12-01 07:45:00 : 2010-12-23 16:06:00
+[2026-03-14 00:09:22,318] 52 root - INFO - Creation of observation dataframe success!
+[2026-03-14 00:09:22,318] 47 root - INFO - Creating observation dataframe:
+[2026-03-14 00:09:22,331] 50 root - INFO - The shape of the observation dataframe is: (88057, 10).
+[2026-03-14 00:09:22,331] 51 root - INFO - The transactiosn in the observation window ranges between: 2009-12-01 07:45:00 : 2010-12-23 16:06:00
+[2026-03-14 00:09:22,331] 52 root - INFO - Creation of observation dataframe success!
+[2026-03-14 00:09:22,331] 75 root - INFO - Creating the product/stockcode level metrics:
+[2026-03-14 00:09:22,356] 77 root - INFO - There are a total of 4,009 unique products.
+[2026-03-14 00:09:22,413] 87 root - INFO - Success for creating the product/stockcode level metrics.
+[2026-03-14 00:09:22,415] 113 root - INFO - Creating the customer level risk for the products they buy.
+[2026-03-14 00:09:22,604] 126 root - INFO - Success for creating the customer level risk for the products they buy.
+[2026-03-14 00:09:22,612] 113 root - INFO - Creating the customer level risk for the products they buy.
+[2026-03-14 00:09:22,669] 126 root - INFO - Success for creating the customer level risk for the products they buy.
+[2026-03-14 00:09:22,672] 153 root - INFO - Creating the customer level aggregated metrics. Using clipped data: False
+[2026-03-14 00:09:23,687] 197 root - INFO - Success in creating the customer level aggregated metrics.
+[2026-03-14 00:09:23,694] 153 root - INFO - Creating the customer level aggregated metrics. Using clipped data: False
+[2026-03-14 00:09:24,506] 197 root - INFO - Success in creating the customer level aggregated metrics.
+[2026-03-14 00:09:24,509] 222 root - INFO - Defining the churn label:
+[2026-03-14 00:09:24,509] 223 root - INFO - The observation window will be until: 2010-12-31 00:00:00.
+[2026-03-14 00:09:24,509] 224 root - INFO - The churn window will be from: 2011-01-01 00:00:00 until:   2011-03-31 00:00:00
+[2026-03-14 00:09:24,522] 226 root - INFO - The min invoice date in churn df: 2011-01-04 10:00:00 and the max is: 2011-03-30 17:33:00
+[2026-03-14 00:09:24,529] 228 root - INFO - There are a total of: 1779 customer IDs who made the transaction in churn window.
+[2026-03-14 00:09:24,531] 230 root - INFO - The count for the churn label is:
+churn
+1    2967
+0    1414
+Name: count, dtype: int64
+[2026-03-14 00:09:24,531] 231 root - INFO - The shape of the finalized df is:(4381, 15)
+[2026-03-14 00:09:24,531] 232 root - INFO - Success at defining the churn label.
+[2026-03-14 00:09:24,533] 222 root - INFO - Defining the churn label:
+[2026-03-14 00:09:24,533] 223 root - INFO - The observation window will be until: 2010-12-31 00:00:00.
+[2026-03-14 00:09:24,533] 224 root - INFO - The churn window will be from: 2011-01-01 00:00:00 until:   2011-03-31 00:00:00
+[2026-03-14 00:09:24,537] 226 root - INFO - The min invoice date in churn df: 2011-01-04 10:00:00 and the max is: 2011-03-30 17:33:00
+[2026-03-14 00:09:24,539] 228 root - INFO - There are a total of: 1609 customer IDs who made the transaction in churn window.
+[2026-03-14 00:09:24,541] 230 root - INFO - The count for the churn label is:
+churn
+1    2864
+0    1267
+Name: count, dtype: int64
+[2026-03-14 00:09:24,541] 231 root - INFO - The shape of the finalized df is:(4131, 15)
+[2026-03-14 00:09:24,541] 232 root - INFO - Success at defining the churn label.
+[2026-03-14 00:09:24,571] 307 root - INFO - Unclipped training data saved to: Artifacts\feature_engineering\data_unclipped\train.parquet
+[2026-03-14 00:09:24,571] 308 root - INFO - Unclipped testing data saved to: Artifacts\feature_engineering\data_unclipped\test.parquet
+[2026-03-14 00:09:24,571] 322 root - INFO - Feature Engineering Artifacts:
+FeatureEngineeringArtifacts(clipped_training_file_path=None, clipped_testing_file_path=None, unclipped_training_file_path='Artifacts\\feature_engineering\\data_unclipped\\train.parquet', unclipped_testing_file_path='Artifacts\\feature_engineering\\data_unclipped\\test.parquet')
+
+[2026-03-14 00:09:24,571] 323 root - INFO - Feature Engineering Completed | Total Execution Time: 0.042 min.
+[2026-03-14 00:09:24,597] 41 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-14 00:09:24,597] 42 root - INFO - END OF: FEATURE ENGINEERING
+[2026-03-14 00:09:24,597] 43 root - INFO - ----------------------------------------------------------------------------------------------------
+
+
+

@@ -1,0 +1,79 @@
+[2026-03-13 21:01:51,287] 15 root - INFO - FeatureEngineering Class initialization success!
+[2026-03-13 21:03:53,964] 16 root - INFO - FeatureEngineering Class initialization success!
+[2026-03-13 21:03:53,964] 178 root - INFO - Feature engineering pipeline started, given branch name: clipped
+[2026-03-13 21:03:54,187] 191 root - INFO - Reading clipped training and testing data completed.
+[2026-03-13 21:03:54,187] 192 root - INFO - Training clipped data has a shape of: (396022, 12)
+[2026-03-13 21:03:54,187] 193 root - INFO - Testing clipped data has a shape of: (101786, 12)
+[2026-03-13 21:03:54,187] 26 root - INFO - Creating observation dataframe:
+[2026-03-13 21:03:54,247] 29 root - INFO - The shape of the observation dataframe is: (341359, 12).
+[2026-03-13 21:03:54,249] 30 root - INFO - The transactiosn in the observation window ranges between: 2009-12-01 07:45:00 : 2010-12-23 16:06:00
+[2026-03-13 21:03:54,249] 31 root - INFO - Creation of observation dataframe success!
+[2026-03-13 21:03:54,249] 26 root - INFO - Creating observation dataframe:
+[2026-03-13 21:03:54,264] 29 root - INFO - The shape of the observation dataframe is: (87976, 12).
+[2026-03-13 21:03:54,264] 30 root - INFO - The transactiosn in the observation window ranges between: 2009-12-01 09:06:00 : 2010-12-23 16:06:00
+[2026-03-13 21:03:54,264] 31 root - INFO - Creation of observation dataframe success!
+[2026-03-13 21:03:54,264] 42 root - INFO - Creating the product/stockcode level metrics:
+[2026-03-13 21:03:54,296] 44 root - INFO - There are a total of 4,009 unique products.
+[2026-03-13 21:03:54,361] 54 root - INFO - Success for creating the product/stockcode level metrics.
+[2026-03-13 21:03:54,363] 66 root - INFO - Creating the customer level risk for the products they buy:
+[2026-03-13 21:03:54,549] 79 root - INFO - Success for creating the customer level risk for the products they buy.
+[2026-03-13 21:03:54,557] 66 root - INFO - Creating the customer level risk for the products they buy:
+[2026-03-13 21:03:54,619] 79 root - INFO - Success for creating the customer level risk for the products they buy.
+[2026-03-13 21:03:54,621] 96 root - INFO - Creating the customer level aggregated metrics. Using clipped data: True
+[2026-03-13 21:03:55,645] 140 root - INFO - Success in creating the customer level aggregated metrics.
+[2026-03-13 21:03:55,651] 96 root - INFO - Creating the customer level aggregated metrics. Using clipped data: True
+[2026-03-13 21:03:56,478] 140 root - INFO - Success in creating the customer level aggregated metrics.
+[2026-03-13 21:04:38,910] 16 root - INFO - FeatureEngineering Class initialization success!
+[2026-03-13 21:04:38,911] 178 root - INFO - Feature engineering pipeline started, given branch name: clipped
+[2026-03-13 21:04:39,137] 191 root - INFO - Reading clipped training and testing data completed.
+[2026-03-13 21:04:39,137] 192 root - INFO - Training clipped data has a shape of: (396022, 12)
+[2026-03-13 21:04:39,137] 193 root - INFO - Testing clipped data has a shape of: (101786, 12)
+[2026-03-13 21:04:39,137] 26 root - INFO - Creating observation dataframe:
+[2026-03-13 21:04:39,197] 29 root - INFO - The shape of the observation dataframe is: (341359, 12).
+[2026-03-13 21:04:39,197] 30 root - INFO - The transactiosn in the observation window ranges between: 2009-12-01 07:45:00 : 2010-12-23 16:06:00
+[2026-03-13 21:04:39,197] 31 root - INFO - Creation of observation dataframe success!
+[2026-03-13 21:04:39,197] 26 root - INFO - Creating observation dataframe:
+[2026-03-13 21:04:39,212] 29 root - INFO - The shape of the observation dataframe is: (87976, 12).
+[2026-03-13 21:04:39,212] 30 root - INFO - The transactiosn in the observation window ranges between: 2009-12-01 09:06:00 : 2010-12-23 16:06:00
+[2026-03-13 21:04:39,212] 31 root - INFO - Creation of observation dataframe success!
+[2026-03-13 21:04:39,212] 42 root - INFO - Creating the product/stockcode level metrics:
+[2026-03-13 21:04:39,242] 44 root - INFO - There are a total of 4,009 unique products.
+[2026-03-13 21:04:39,306] 54 root - INFO - Success for creating the product/stockcode level metrics.
+[2026-03-13 21:04:39,311] 66 root - INFO - Creating the customer level risk for the products they buy:
+[2026-03-13 21:04:39,497] 79 root - INFO - Success for creating the customer level risk for the products they buy.
+[2026-03-13 21:04:39,504] 66 root - INFO - Creating the customer level risk for the products they buy:
+[2026-03-13 21:04:39,566] 79 root - INFO - Success for creating the customer level risk for the products they buy.
+[2026-03-13 21:04:39,569] 96 root - INFO - Creating the customer level aggregated metrics. Using clipped data: True
+[2026-03-13 21:04:40,579] 140 root - INFO - Success in creating the customer level aggregated metrics.
+[2026-03-13 21:04:40,586] 96 root - INFO - Creating the customer level aggregated metrics. Using clipped data: True
+[2026-03-13 21:04:41,411] 140 root - INFO - Success in creating the customer level aggregated metrics.
+[2026-03-13 21:04:41,413] 151 root - INFO - Defining the churn label:
+[2026-03-13 21:04:41,413] 152 root - INFO - The observation window will be until: 2010-12-31 00:00:00.
+[2026-03-13 21:04:41,413] 153 root - INFO - The churn window will be from: 2011-01-01 00:00:00 until:   2011-03-31 00:00:00
+[2026-03-13 21:04:41,429] 155 root - INFO - The min invoice date in churn df: 2011-01-04 10:00:00 and the max is: 2011-03-30 17:33:00
+[2026-03-13 21:04:41,440] 157 root - INFO - There are a total of: 1781 customer IDs who made the transaction in churn window.
+[2026-03-13 21:04:41,443] 159 root - INFO - The count for the churn label is:
+churn
+1    2966
+0    1416
+Name: count, dtype: int64
+[2026-03-13 21:04:41,443] 160 root - INFO - The shape of the finalized df is:(4382, 15)
+[2026-03-13 21:04:41,443] 161 root - INFO - Success at defining the churn label.
+[2026-03-13 21:04:41,445] 151 root - INFO - Defining the churn label:
+[2026-03-13 21:04:41,445] 152 root - INFO - The observation window will be until: 2010-12-31 00:00:00.
+[2026-03-13 21:04:41,446] 153 root - INFO - The churn window will be from: 2011-01-01 00:00:00 until:   2011-03-31 00:00:00
+[2026-03-13 21:04:41,450] 155 root - INFO - The min invoice date in churn df: 2011-01-04 10:00:00 and the max is: 2011-03-30 17:33:00
+[2026-03-13 21:04:41,452] 157 root - INFO - There are a total of: 1621 customer IDs who made the transaction in churn window.
+[2026-03-13 21:04:41,455] 159 root - INFO - The count for the churn label is:
+churn
+1    2876
+0    1273
+Name: count, dtype: int64
+[2026-03-13 21:04:41,455] 160 root - INFO - The shape of the finalized df is:(4149, 15)
+[2026-03-13 21:04:41,455] 161 root - INFO - Success at defining the churn label.
+[2026-03-13 21:04:41,492] 228 root - INFO - Clipped training data saved to: Artifacts\feature_engineering\data_clipped\train.parquet
+[2026-03-13 21:04:41,492] 229 root - INFO - Clipped testing data saved to: Artifacts\feature_engineering\data_clipped\test.parquet
+[2026-03-13 21:04:41,492] 250 root - INFO - Feature Engineering Artifacts:
+FeatureEngineeringArtifacts(clipped_training_file_path='Artifacts\\feature_engineering\\data_clipped\\train.parquet', clipped_testing_file_path='Artifacts\\feature_engineering\\data_clipped\\test.parquet', unclipped_training_file_path=None, unclipped_testing_file_path=None)
+
+[2026-03-13 21:04:41,492] 251 root - INFO - Feature Engineering Completed | Total Execution Time: 0.043 min.

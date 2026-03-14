@@ -28,7 +28,7 @@ class FeatureEngineering:
         except Exception as e:
             raise CustomerChurnException(e, sys)
         
-    def create_observation_df(self, df:pd.DataFrame) -> pd.DataFrame:
+    def create_observation_df(self, df:pd.DataFrame, filename:str, branch_name:str) -> pd.DataFrame:
         """
         Filter transactions to those occurring within the observation window.
         The observation window is defined as all transactions with invoicedate <= self.observation_date.
@@ -44,12 +44,12 @@ class FeatureEngineering:
 
         """
         try:
-            logging.info("Creating observation dataframe:")
+            logging.info(f"Creating observation dataframe via 'create_observation_df()' method started for '{filename}:{branch_name}' df.")
             observation_df = df[df['invoicedate'] <= self.observation_date].copy()
             min_date, max_date = observation_df['invoicedate'].min(), observation_df['invoicedate'].max()
-            logging.info(f"The shape of the observation dataframe is: {observation_df.shape}.")
-            logging.info(f"The transactiosn in the observation window ranges between: {min_date} : {max_date}")
-            logging.info("Creation of observation dataframe success!")
+            logging.info(f"The shape of the {filename} observation dataframe is: {observation_df.shape}.")
+            logging.info(f"The transactions in the {filename} observation window ranges between: {min_date} : {max_date}")
+            logging.info(f"Creating observation dataframe via 'create_observation_df()' method for '{filename}:{branch_name}' df success.")
             return observation_df
         except Exception as e:
             raise CustomerChurnException(e, sys)
@@ -65,16 +65,16 @@ class FeatureEngineering:
 
         Parameters
         ----------
-        observation_df : pd.DataFrame -> Observation window transactions (output of create_observation_df).
+        observation_df : pd.DataFrame -> Observation window transactions (output of create_observation_df) of the training df.
 
         Returns
         -------
         pd.DataFrame -> product/stockcode level metrics
         """
         try:
-            logging.info("Creating the product/stockcode level metrics:")
+            logging.info("Creating the product/stockcode level metrics using 'create_stockcode_lvl_metrics()' method.")
             stock_code_df= observation_df[['invoice', 'stockcode', 'quantity', 'order_issue']].copy()
-            logging.info(f"There are a total of {stock_code_df['stockcode'].nunique():,} unique products.")
+            logging.info(f"There are a total of {stock_code_df['stockcode'].nunique():,} unique products on the given training dataset.")
             
             # Adding total_n_orders and total_n_order_issues per stockcode:
             stock_code_df_aggregated = stock_code_df.groupby('stockcode').agg(
@@ -84,14 +84,15 @@ class FeatureEngineering:
             # Adding total_order_issue_rate:
             stock_code_df_aggregated['total_order_issue_rate_w_prod'] = (stock_code_df_aggregated['total_n_order_issues_with_prod'] / 
             stock_code_df_aggregated['total_n_orders_of_prod'])
-            logging.info("Success for creating the product/stockcode level metrics.")
+            logging.info("Creating the product/stockcode level metrics using 'create_stockcode_lvl_metrics()' method success")
             return stock_code_df_aggregated                
         except Exception as e:
             raise CustomerChurnException(e, sys)
         
     
     def create_customer_risk_at_product_lvl(self, observation_df:pd.DataFrame, 
-                                            stock_code_df_aggregated:pd.DataFrame) -> pd.DataFrame:
+                                            stock_code_df_aggregated:pd.DataFrame,
+                                            filename:str, branch_name:str) -> pd.DataFrame:
         """
         For each customer, summarize the riskiness of the products they bought.
 
@@ -110,7 +111,7 @@ class FeatureEngineering:
         risk level of the products they bought.
         """
         try:
-            logging.info("Creating the customer level risk for the products they buy.")
+            logging.info(f"Creating the customer level risk for the products they buy: '{filename}:{branch_name} df'")
             product_per_customer = observation_df[['customerid', 'stockcode']].drop_duplicates()
 
             # Join the stock level metrics with the product per customer df:
@@ -123,7 +124,7 @@ class FeatureEngineering:
                                             max_stockcode_issue_rate=('total_order_issue_rate_w_prod', 'max'),
                                             total_orders_made_for_stock = ('total_n_orders_of_prod', 'sum')
                                         ).reset_index()
-            logging.info("Success for creating the customer level risk for the products they buy.")
+            logging.info(f"Success for creating the customer level risk for the products they buy for '{filename}:{branch_name} df'")
             return customer_risk_at_product_lvl                
         except Exception as e:
             raise CustomerChurnException(e, sys)
@@ -131,7 +132,9 @@ class FeatureEngineering:
     
     def create_customer_lvl_agg_metrics(self, observation_df:pd.DataFrame, 
                                         customer_risk_at_product_lvl:pd.DataFrame,
-                                       use_clipped:bool) -> pd.DataFrame:
+                                       use_clipped:bool,
+                                       filename:str,
+                                       branch_name:str) -> pd.DataFrame:
         """
         Build final customer-level features from transaction history and product risk.
 
@@ -150,7 +153,7 @@ class FeatureEngineering:
             Final customer-level features, ready for labeling the churn.
         """
         try:
-            logging.info(f"Creating the customer level aggregated metrics. Using clipped data: {use_clipped}")
+            logging.info(f"Creating the customer level aggregated metrics for {filename}:{branch_name} data.")
             if use_clipped:
                 qty_col = 'quantity_abs_clipped'
                 price_col = 'price_clipped'
@@ -200,7 +203,7 @@ class FeatureEngineering:
             raise CustomerChurnException(e, sys)
     
 
-    def define_churn_label(self, df:pd.DataFrame, final_customer_lvl_features:pd.DataFrame) -> pd.DataFrame:
+    def define_churn_label(self, df:pd.DataFrame, final_customer_lvl_features:pd.DataFrame, filename:str, branch_name:str) -> pd.DataFrame:
         """
         Takes in the final_customer_lvl_features df and add churn label to the 
         customer feature table(1=churn, 0=retained).
@@ -219,7 +222,7 @@ class FeatureEngineering:
         pd.DataFrame ->  final_customer_lvl_features with an extra feature 'churn'
         """
         try:
-            logging.info("Defining the churn label:")
+            logging.info(f"Defining the churn label for {filename}:{branch_name} df.")
             logging.info(f"The observation window will be until: {self.observation_date}.")
             logging.info(f"The churn window will be from: {self.observation_date + pd.DateOffset(days=1)} until:   {self.churn_cutoff_date}")
             churn_df = df[(df['invoicedate'] > self.observation_date) & (df['invoicedate'] <= self.churn_cutoff_date)].copy()
@@ -229,7 +232,7 @@ class FeatureEngineering:
             final_customer_lvl_features['churn'] = (~final_customer_lvl_features['customerid'].isin(retained_customer_ids)).astype(int)
             logging.info(f"The count for the churn label is:\n{final_customer_lvl_features['churn'].value_counts()}")
             logging.info(f"The shape of the finalized df is:{final_customer_lvl_features.shape}")
-            logging.info("Success at defining the churn label.")
+            logging.info(f"Success at defining the churn label for {filename}:{branch_name} df.")
             return final_customer_lvl_features                   
         except Exception as e:
             raise CustomerChurnException(e, sys)
@@ -245,9 +248,11 @@ class FeatureEngineering:
         clipped: data clipped at 99th quantile to clip the outlier values for the linear models
         unclipped: original data for tree models
         """
-        
+        logging.info(f"Feature Engineering For: {branch_name} dataframes:")
+        logging.info(f"{'-' * 100}")
+
         starting_time = time.perf_counter()
-        logging.info(f"Feature engineering pipeline started, given branch name: {branch_name}")
+        logging.info(f"Feature engineering pipeline started, given branch name: '{branch_name}'")
         use_clipped = False
         try:
             
@@ -259,34 +264,60 @@ class FeatureEngineering:
 
             # Load the data:
             train_df = pd.read_parquet(train_path)
-            test_df = pd.read_parquet(test_path)
-            logging.info(f"Reading {branch_name} training and testing data completed.")
+            logging.info(f"Reading {train_path} data completed.")
             logging.info(f"Training {branch_name} data has a shape of: {train_df.shape}")
+
+            test_df = pd.read_parquet(test_path)
+            logging.info(f"Reading {test_path} data completed.")
             logging.info(f"Testing {branch_name} data has a shape of: {test_df.shape}")
+           
             
             use_clipped = (branch_name == 'clipped')
 
             # 1. Create the observation records:
-            train_df_obs = self.create_observation_df(df=train_df)
-            test_df_obs = self.create_observation_df(df=test_df)
+            train_df_obs = self.create_observation_df(df=train_df, filename='training', branch_name=branch_name)
+            test_df_obs = self.create_observation_df(df=test_df, filename='testing', branch_name=branch_name)
+            logging.info(f"{'-' * 50}")
 
             # 2. Create the stock-code level metrics only using training data to avoid data leakage:
             train_stock_code_metrics_df = self.create_stockcode_lvl_metrics(observation_df=train_df_obs)
+            logging.info(f"{'-' * 50}")
             
 
             # 3. Create customer risk at product/stock-code level:
-            train_customer_risk_at_product_lvl = self.create_customer_risk_at_product_lvl(observation_df=train_df_obs,                                                                                    stock_code_df_aggregated=train_stock_code_metrics_df)
-            test_customer_risk_at_product_lvl = self.create_customer_risk_at_product_lvl(observation_df=test_df_obs,                                                                                  stock_code_df_aggregated=train_stock_code_metrics_df)
+            train_customer_risk_at_product_lvl = self.create_customer_risk_at_product_lvl(observation_df=train_df_obs, 
+                                                                                          stock_code_df_aggregated=train_stock_code_metrics_df,
+                                                                                          branch_name=branch_name,
+                                                                                          filename='training')
+            test_customer_risk_at_product_lvl = self.create_customer_risk_at_product_lvl(observation_df=test_df_obs, 
+                                                                                         stock_code_df_aggregated=train_stock_code_metrics_df,
+                                                                                         branch_name=branch_name,
+                                                                                         filename='testing')
+            logging.info(f"{'-' * 50}")
 
             # 4. Create customer level aggregated metrics:
-            train_final_customer_lvl_features = self.create_customer_lvl_agg_metrics(observation_df=train_df_obs,                                                                                customer_risk_at_product_lvl=train_customer_risk_at_product_lvl,
-                                                                                use_clipped=use_clipped)
-            test_final_customer_lvl_features = self.create_customer_lvl_agg_metrics(observation_df=test_df_obs,                                                                                    customer_risk_at_product_lvl=test_customer_risk_at_product_lvl,
-                                                                                use_clipped=use_clipped)
+            train_final_customer_lvl_features = self.create_customer_lvl_agg_metrics(observation_df=train_df_obs, 
+                                                                                     customer_risk_at_product_lvl=train_customer_risk_at_product_lvl, 
+                                                                                     use_clipped=use_clipped,
+                                                                                     filename='training',
+                                                                                     branch_name=branch_name)
+            test_final_customer_lvl_features = self.create_customer_lvl_agg_metrics(observation_df=test_df_obs, 
+                                                                                    customer_risk_at_product_lvl=test_customer_risk_at_product_lvl, 
+                                                                                    use_clipped=use_clipped,
+                                                                                    filename='testing',
+                                                                                    branch_name=branch_name)
+            logging.info(f"{'-' * 50}")
 
             # 5. Define the churn:
-            train_final_customer_lvl_features = self.define_churn_label(df=train_df,                                                                           final_customer_lvl_features=train_final_customer_lvl_features)
-            test_final_customer_lvl_features = self.define_churn_label(df=test_df,                                                                          final_customer_lvl_features=test_final_customer_lvl_features)
+            train_final_customer_lvl_features = self.define_churn_label(df=train_df, 
+                                                                        final_customer_lvl_features=train_final_customer_lvl_features,
+                                                                        filename='training',
+                                                                        branch_name=branch_name)
+            test_final_customer_lvl_features = self.define_churn_label(df=test_df, 
+                                                                       final_customer_lvl_features=test_final_customer_lvl_features,
+                                                                       filename='testing',
+                                                                       branch_name=branch_name
+                                                                       )
 
         
             # Making the directory for the clipped data:

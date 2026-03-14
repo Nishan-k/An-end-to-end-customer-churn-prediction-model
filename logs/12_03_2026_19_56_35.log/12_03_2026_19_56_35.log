@@ -1,0 +1,81 @@
+[2026-03-12 19:56:37,926] 14 root - INFO - Reading YAML file from the path: params.yaml
+[2026-03-12 19:56:37,934] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-12 19:56:37,934] 38 root - INFO - START OF: DATA INGSETION
+[2026-03-12 19:56:37,935] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+
+[2026-03-12 19:56:37,940] 122 root - INFO - Data Ingestion Pipeline Started:
+[2026-03-12 19:57:35,341] 51 root - INFO - RAW data shape: (1067371, 9) pulled from MongoDB.
+[2026-03-12 19:57:35,683] 57 root - INFO - Total number of dropped rows: 243,007 or 22.77% with missing Customer ID
+[2026-03-12 19:57:36,477] 68 root - INFO - Cut-off date: 2011-03-31 00:00:00 | Before: 824,364 samples | After: 513,367 samples. 
+[2026-03-12 19:57:37,125] 75 root - INFO - Data Import From MongoDB As DataFrame Success | Records: 513,367 & Features: 8
+[2026-03-12 19:57:37,867] 93 root - INFO - Dataframe saved as Parquet file in feature store in the path: Artifacts\data_ingestion\feature_store as a backup file.
+[2026-03-12 19:57:38,228] 106 root - INFO - Train-test split completed | Training: (410693, 8) (80.0%)  and Test: (102674, 8) (20.0%).
+[2026-03-12 19:57:39,021] 111 root - INFO - Exporting train and test data as Parquet completed.
+[2026-03-12 19:57:39,107] 137 root - INFO - Data Ingestion Artifacts:
+DataIngestionArtifacts(training_file_path='Artifacts\\data_ingestion\\ingested\\train.parquet', test_file_path='Artifacts\\data_ingestion\\ingested\\test.parquet')
+
+[2026-03-12 19:57:39,108] 138 root - INFO - Data Ingestion Completed | Total Execution Time: 1.019 min.
+[2026-03-12 19:57:39,276] 41 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-12 19:57:39,277] 42 root - INFO - END OF: DATA INGSETION
+[2026-03-12 19:57:39,277] 43 root - INFO - ----------------------------------------------------------------------------------------------------
+
+
+
+[2026-03-12 19:57:39,277] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-12 19:57:39,277] 38 root - INFO - START OF: DATA VALIDATION
+[2026-03-12 19:57:39,277] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+
+[2026-03-12 19:57:39,277] 14 root - INFO - Reading YAML file from the path: data_schema\schema.yaml
+[2026-03-12 19:57:39,292] 113 root - INFO - Data Validation Pipeline Started:
+[2026-03-12 19:57:39,531] 44 root - INFO - Training dataframe: Column length validation success!
+[2026-03-12 19:57:39,531] 44 root - INFO - Testing dataframe: Column length validation success!
+[2026-03-12 19:57:39,531] 65 root - INFO - Training dataframe: Data types validation success!
+[2026-03-12 19:57:39,532] 65 root - INFO - Testing dataframe: Data types validation success!
+[2026-03-12 19:57:39,959] 133 root - INFO - Data Validation Artifacts:
+DataValidationArtifacts(validation_status=True, valid_train_file_path='Artifacts\\data_validation\\valid\\train.parquet', valid_test_file_path='Artifacts\\data_validation\\valid\\test.parquet', invalid_train_file_path=None, invalid_test_file_path=None, drift_report_file_path=None)
+
+[2026-03-12 19:57:39,959] 134 root - INFO - Data Validation Completed | Total Execution Time: 0.011 min.
+[2026-03-12 19:57:39,959] 41 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-12 19:57:39,960] 42 root - INFO - END OF: DATA VALIDATION
+[2026-03-12 19:57:39,960] 43 root - INFO - ----------------------------------------------------------------------------------------------------
+
+
+
+[2026-03-12 19:57:39,960] 37 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-12 19:57:39,960] 38 root - INFO - START OF: DATA CLEANING: TESTING DATA
+[2026-03-12 19:57:39,960] 39 root - INFO - ----------------------------------------------------------------------------------------------------
+
+[2026-03-12 19:57:39,960] 14 root - INFO - Reading YAML file from the path: params.yaml
+[2026-03-12 19:57:39,961] 28 root - INFO - Data cleaning parameters loaded with success: {'imputation_strategy': 'median', 'capping_quantiles': 0.99}
+[2026-03-12 19:57:39,961] 206 root - INFO - Cleaning Testing Data Pipeline Started:
+[2026-03-12 19:57:40,010] 210 root - INFO - Reading testing data success!!
+[2026-03-12 19:57:40,140] 38 root - INFO - Total number of duplicates in the given testing dataframe: 888 were dropped.
+[2026-03-12 19:57:40,140] 212 root - INFO - Duplicates removed in the testing data.
+[2026-03-12 19:57:40,157] 88 root - INFO - testing dataframe missing value report:
+invoice        0
+stockcode      0
+description    0
+quantity       0
+invoicedate    0
+price          8
+customerid     0
+country        0
+dtype: int64
+[2026-03-12 19:57:40,167] 74 root - INFO - Imputer loading Success from Artifacts\data_cleaning\missing_data_imputer\SimpleImputerForPrice.joblib
+[2026-03-12 19:57:40,171] 76 root - INFO - Dataframe: testing on column Price, imputation success!
+[2026-03-12 19:57:40,313] 106 root - INFO - Total number of cancelled orders in testing dataframe: 2,447
+[2026-03-12 19:57:40,412] 228 root - INFO - Unclipped test file saved at: Artifacts\data_cleaning\data_unclipped\test.parquet
+[2026-03-12 19:57:40,413] 14 root - INFO - Reading YAML file from the path: Artifacts\data_cleaning\caps.yaml
+[2026-03-12 19:57:40,421] 141 root - INFO - Column: price has been clipped using 14.95
+[2026-03-12 19:57:40,422] 141 root - INFO - Column: quantity_abs has been clipped using 144.0
+[2026-03-12 19:57:40,522] 236 root - INFO - Clipped testing data saved at: Artifacts\data_cleaning\data_clipped\test.parquet
+[2026-03-12 19:57:40,522] 248 root - INFO - Data Cleaning Artifacts:
+DataCleaningArtifacts(clipped_training_file_path=None, clipped_testing_file_path='Artifacts\\data_cleaning\\data_clipped\\test.parquet', unclipped_training_file_path=None, unclipped_testing_file_path='Artifacts\\data_cleaning\\data_unclipped\\test.parquet', simple_imputer_file_path=None, caps_file_path_yaml=None)
+
+[2026-03-12 19:57:40,522] 249 root - INFO - Cleaning Testing Data Completed | Total Execution Time: 0.009 min.
+[2026-03-12 19:57:40,528] 41 root - INFO - ----------------------------------------------------------------------------------------------------
+[2026-03-12 19:57:40,529] 42 root - INFO - END OF: DATA CLEANING: TESTING DATA
+[2026-03-12 19:57:40,529] 43 root - INFO - ----------------------------------------------------------------------------------------------------
+
+
+
