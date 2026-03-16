@@ -19,3 +19,6 @@ uvicorn
 openpyxl
 seaborn
 joblib
+imblearn
+xgboost
+statsmodels

@@ -58,7 +58,7 @@ class DataIngestion:
 
             # Necessary data-types changes:
             df['invoicedate'] = pd.to_datetime(df['invoicedate'], unit='ms')
-            df['customerid'] = df['customerid'].astype('string')
+            df['customerid'] = df['customerid'].astype('int64')
 
             # Drop the indexes outside the Observation and churn window:
             indexes_to_drop = df[df['invoicedate'] > self.cut_off_date_dt].index

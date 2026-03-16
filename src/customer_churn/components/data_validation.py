@@ -50,20 +50,32 @@ class DataValidation:
             raise
 
 
-    def are_dtypes_valid(self, df:pd.DataFrame, df_name:str) -> bool:
+    def are_dtypes_valid(self, df: pd.DataFrame, df_name: str) -> bool:
         """
-        Validates the dtypes of the data frame passed with the dtypes defined in the schema:
+        Validates the dtypes of the dataframe passed with the dtypes defined in the schema.
+        Checks ALL columns before raising, so you see every mismatch at once.
         """
         try:
+            mismatches = []
             for col, expected_dtype in self.schema.items():
                 actual_dtype = df[col].dtype
                 if expected_dtype != actual_dtype:
-                    error_message = f"Data-type Mismatch in {df_name} dataframe. Column: {col} | Expected: {expected_dtype} | Got: {actual_dtype}"
-                    logging.error(error_message)
-                    raise CustomerChurnException(error_message, sys)
-                else:
-                    logging.info(f"{df_name} dataframe: Data types validation success!")
-                    return True
+                    error_message = (
+                        f"Column: '{col}' | Expected: '{expected_dtype}' | Got: '{actual_dtype}'"
+                    )
+                    logging.error(f"Data-type mismatch in '{df_name}' — {error_message}")
+                    mismatches.append(error_message)
+
+            if mismatches:
+                full_error = f"Data-type validation failed for '{df_name}':\n" + "\n".join(mismatches)
+                try:
+                    raise ValueError(full_error)
+                except ValueError as e:
+                    raise CustomerChurnException(e, sys)
+
+            logging.info(f"'{df_name}' dataframe: All column data-type validations passed.")
+            return True
+
         except Exception as e:
             if not isinstance(e, CustomerChurnException):
                 raise CustomerChurnException(e, sys)
