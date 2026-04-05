@@ -35,3 +35,11 @@ class FeatureEngineeringArtifacts:
     clipped_testing_file_path: Optional[str] = None
     unclipped_training_file_path: Optional[str] = None
     unclipped_testing_file_path: Optional[str] = None
+
+
+# 5. Data pre-processing artifacts:
+@dataclass
+class PreProcessingArtifacts:
+    pre_processor_file_path: str
+    X_path: str
+    y_path: str

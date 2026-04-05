@@ -52,3 +52,11 @@ DATA_CLEANING_CAPS_FILE: str = "caps.yaml"
 FEATURE_ENGINEERING_DIR_NAME: str = "feature_engineering"
 FEATURE_ENGINEERING_CLIPPED_DIR_NAME: str = "data_clipped"
 FEATURE_ENGINEERING_UNCLIPPED_DIR_NAME: str = "data_unclipped"
+
+
+################################################
+# Constant variables for data pre-processing:
+################################################
+PRE_PROCESSING_DIR_NAME: str= "pre_processing"
+PRE_PROCESSING_FILE_NAME: str = "pre_processor.pkl"
+PRE_PROCESSING_FULL_DATASET:str = "full_dataset"

@@ -1,0 +1,6 @@
+[2026-03-28 18:51:00,898] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2026-03-28 18:51:00,912] 107 dagshub - INFO - Accessing as Nishan-k
+[2026-03-28 18:51:01,436] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/repos/Nishan-k/An-end-to-end-customer-churn-prediction-model "HTTP/1.1 200 OK"
+[2026-03-28 18:51:01,932] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[2026-03-28 18:51:01,941] 107 dagshub - INFO - Initialized MLflow to track repo "Nishan-k/An-end-to-end-customer-churn-prediction-model"
+[2026-03-28 18:51:01,950] 107 dagshub - INFO - Repository Nishan-k/An-end-to-end-customer-churn-prediction-model initialized!

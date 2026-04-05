@@ -83,3 +83,14 @@ class FeatureEngineeringConfig:
         self.unclipped_test_file_path: str = os.path.join(self.unclipped_dir, training_pipeline.TEST_FILE_NAME)
 
 
+
+# Pre Processing Config:
+class DataPreprocessingConfig:
+    def __init__(self):
+        self.pre_processing_dir: str = os.path.join(training_pipeline.ARTIFACT_DIR,
+                                                    training_pipeline.PRE_PROCESSING_DIR_NAME)
+        self.pre_processing_file_name: str = os.path.join(self.pre_processing_dir, 
+                                                          training_pipeline.PRE_PROCESSING_FILE_NAME)
+        self.pre_processing_full_data_dir:str = os.path.join(self.pre_processing_dir, training_pipeline.PRE_PROCESSING_FULL_DATASET)
+
+        

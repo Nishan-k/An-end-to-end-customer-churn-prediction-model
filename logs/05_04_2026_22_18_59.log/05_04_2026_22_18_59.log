@@ -1,0 +1,112 @@
+[2026-04-05 22:32:35,245] 11 root - INFO - Data Pre-Processing Class Initialization Success!
+[2026-04-05 22:32:35,245] 110 root - INFO - Pre-Processor Pipeline Trigerred.
+[2026-04-05 22:32:35,245] 20 root - INFO - Concatenating the final dataset.
+[2026-04-05 22:33:16,929] 11 root - INFO - Data Pre-Processing Class Initialization Success!
+[2026-04-05 22:33:16,929] 110 root - INFO - Pre-Processor Pipeline Trigerred.
+[2026-04-05 22:33:16,929] 20 root - INFO - Concatenating the final dataset.
+[2026-04-05 22:33:16,943] 25 root - INFO - Concatenation completed. Final data size: (8518, 15)
+[2026-04-05 22:33:16,943] 37 root - INFO - The numerical features are:
+['customerid', 'order_frequency', 'total_monetary_value', 'total_quantity_abs', 'total_order_issues', 'avg_order_value', 'avg_quantity_per_order', 'customer_order_issue_rate', 'recency', 'tenure', 'avg_stockcode_issue_rate', 'max_stockcode_issue_rate', 'total_orders_made_for_stock', 'churn'] and the categoical features are:
+['country']
+[2026-04-05 22:33:16,944] 38 root - INFO - The dataset has 14 numerical features and 1 categorical features.
+[2026-04-05 22:33:16,946] 51 root - INFO - Dependent and independent features created. Independent: (8518, 13) and dependent: (8518,)
+[2026-04-05 22:33:16,967] 59 root - INFO - Independent feature saved at: Artifacts\pre_processing\full_dataset\X.parquet
+[2026-04-05 22:33:16,967] 60 root - INFO - Dependent features saved at: Artifacts\pre_processing\full_dataset\y.parquet
+[2026-04-05 22:33:16,967] 71 root - INFO - Creating the pre-processing file:
+[2026-04-05 22:34:24,062] 11 root - INFO - Data Pre-Processing Class Initialization Success!
+[2026-04-05 22:34:24,062] 114 root - INFO - Pre-Processor Pipeline Trigerred.
+[2026-04-05 22:34:24,063] 20 root - INFO - Concatenating the final dataset.
+[2026-04-05 22:34:24,075] 25 root - INFO - Concatenation completed. Final data size: (8518, 15)
+[2026-04-05 22:34:24,076] 37 root - INFO - The numerical features are:
+['customerid', 'order_frequency', 'total_monetary_value', 'total_quantity_abs', 'total_order_issues', 'avg_order_value', 'avg_quantity_per_order', 'customer_order_issue_rate', 'recency', 'tenure', 'avg_stockcode_issue_rate', 'max_stockcode_issue_rate', 'total_orders_made_for_stock', 'churn'] and the categoical features are:
+['country']
+[2026-04-05 22:34:24,076] 38 root - INFO - The dataset has 14 numerical features and 1 categorical features.
+[2026-04-05 22:34:24,078] 51 root - INFO - Dependent and independent features created. Independent: (8518, 13) and dependent: (8518,)
+[2026-04-05 22:34:24,102] 59 root - INFO - Independent feature saved at: Artifacts\pre_processing\full_dataset\X.parquet
+[2026-04-05 22:34:24,102] 60 root - INFO - Dependent features saved at: Artifacts\pre_processing\full_dataset\y.parquet
+[2026-04-05 22:34:43,033] 11 root - INFO - Data Pre-Processing Class Initialization Success!
+[2026-04-05 22:34:43,033] 114 root - INFO - Pre-Processor Pipeline Trigerred.
+[2026-04-05 22:34:43,034] 20 root - INFO - Concatenating the final dataset.
+[2026-04-05 22:34:43,051] 25 root - INFO - Concatenation completed. Final data size: (8518, 15)
+[2026-04-05 22:34:43,052] 37 root - INFO - The numerical features are:
+['customerid', 'order_frequency', 'total_monetary_value', 'total_quantity_abs', 'total_order_issues', 'avg_order_value', 'avg_quantity_per_order', 'customer_order_issue_rate', 'recency', 'tenure', 'avg_stockcode_issue_rate', 'max_stockcode_issue_rate', 'total_orders_made_for_stock', 'churn'] and the categoical features are:
+['country']
+[2026-04-05 22:34:43,053] 38 root - INFO - The dataset has 14 numerical features and 1 categorical features.
+[2026-04-05 22:34:43,055] 51 root - INFO - Dependent and independent features created. Independent: (8518, 13) and dependent: (8518,)
+[2026-04-05 22:34:43,077] 59 root - INFO - Independent feature saved at: Artifacts\pre_processing\full_dataset\X.parquet
+[2026-04-05 22:34:43,077] 60 root - INFO - Dependent features saved at: Artifacts\pre_processing\full_dataset\y.parquet
+[2026-04-05 22:34:43,079] 75 root - INFO - Creating the pre-processing file:
+[2026-04-05 22:36:38,256] 11 root - INFO - Data Pre-Processing Class Initialization Success!
+[2026-04-05 22:36:38,257] 116 root - INFO - Pre-Processor Pipeline Trigerred.
+[2026-04-05 22:36:38,258] 20 root - INFO - Concatenating the final dataset.
+[2026-04-05 22:36:38,275] 25 root - INFO - Concatenation completed. Final data size: (8518, 15)
+[2026-04-05 22:36:38,276] 37 root - INFO - The numerical features are:
+['customerid', 'order_frequency', 'total_monetary_value', 'total_quantity_abs', 'total_order_issues', 'avg_order_value', 'avg_quantity_per_order', 'customer_order_issue_rate', 'recency', 'tenure', 'avg_stockcode_issue_rate', 'max_stockcode_issue_rate', 'total_orders_made_for_stock', 'churn'] and the categoical features are:
+['country']
+[2026-04-05 22:36:38,276] 38 root - INFO - The dataset has 14 numerical features and 1 categorical features.
+[2026-04-05 22:36:38,279] 51 root - INFO - Dependent and independent features created. Independent: (8518, 13) and dependent: (8518,)
+[2026-04-05 22:36:38,309] 59 root - INFO - Independent feature saved at: Artifacts\pre_processing\full_dataset\X.parquet
+[2026-04-05 22:36:38,309] 60 root - INFO - Dependent features saved at: Artifacts\pre_processing\full_dataset\y.parquet
+[2026-04-05 22:36:38,311] 77 root - INFO - Creating the pre-processing file:
+[2026-04-05 22:42:28,133] 11 root - INFO - Data Pre-Processing Class Initialization Success!
+[2026-04-05 22:42:28,133] 107 root - INFO - Pre-Processor Pipeline Trigerred.
+[2026-04-05 22:42:28,133] 20 root - INFO - Concatenating the final dataset.
+[2026-04-05 22:42:28,146] 25 root - INFO - Concatenation completed. Final data size: (8518, 15)
+[2026-04-05 22:44:11,683] 11 root - INFO - Data Pre-Processing Class Initialization Success!
+[2026-04-05 22:44:11,684] 109 root - INFO - Pre-Processor Pipeline Trigerred.
+[2026-04-05 22:44:11,684] 20 root - INFO - Concatenating the final dataset.
+[2026-04-05 22:44:11,697] 25 root - INFO - Concatenation completed. Final data size: (8518, 15)
+[2026-04-05 22:44:11,698] 39 root - INFO - The numerical features are:
+['order_frequency', 'total_monetary_value', 'total_quantity_abs', 'total_order_issues', 'avg_order_value', 'avg_quantity_per_order', 'customer_order_issue_rate', 'recency', 'tenure', 'avg_stockcode_issue_rate', 'max_stockcode_issue_rate', 'total_orders_made_for_stock'] and the categoical features are:
+['country']
+[2026-04-05 22:44:11,698] 40 root - INFO - The dataset has 12 numerical features and 1 categorical features.
+[2026-04-05 22:44:11,701] 53 root - INFO - Dependent and independent features created. Independent: (8518, 13) and dependent: (8518,)
+[2026-04-05 22:44:11,723] 61 root - INFO - Independent feature saved at: Artifacts\pre_processing\full_dataset\X.parquet
+[2026-04-05 22:44:11,723] 62 root - INFO - Dependent features saved at: Artifacts\pre_processing\full_dataset\y.parquet
+[2026-04-05 22:44:11,724] 73 root - INFO - Creating the pre-processing file:
+[2026-04-05 22:44:11,744] 79 root - INFO - Preprocessor fitted successfully.
+ColumnTransformer(transformers=[('numerical', RobustScaler(),
+                                 ['order_frequency', 'total_monetary_value',
+                                  'total_quantity_abs', 'total_order_issues',
+                                  'avg_order_value', 'avg_quantity_per_order',
+                                  'customer_order_issue_rate', 'recency',
+                                  'tenure', 'avg_stockcode_issue_rate',
+                                  'max_stockcode_issue_rate',
+                                  'total_orders_made_for_stock']),
+                                ('categorical',
+                                 OneHotEncoder(handle_unknown='ignore',
+                                               sparse_output=False),
+                                 ['country'])])
+[2026-04-05 22:44:11,747] 86 root - INFO - Preprocessor saved to Artifacts\pre_processing\pre_processor.pkl
+[2026-04-05 22:44:11,747] 122 root - INFO - Pre-Processing Artifacts:
+PreProcessingArtifacts(pre_processor_file_path='Artifacts\\pre_processing\\pre_processor.pkl', X_path='Artifacts\\pre_processing\\full_dataset\\X.parquet', y_path='Artifacts\\pre_processing\\full_dataset\\y.parquet')
+[2026-04-05 22:44:11,748] 123 root - INFO - Pre-processor completed! | Total Execution Time: 0.001 min.
+[2026-04-05 22:54:11,799] 11 root - INFO - Data Pre-Processing Class Initialization Success!
+[2026-04-05 22:54:11,800] 141 root - INFO - Pre-Processor Pipeline Trigerred.
+[2026-04-05 22:54:11,800] 24 root - INFO - Concatenating the final dataset.
+[2026-04-05 22:54:11,814] 29 root - INFO - Concatenation completed. Final data size: (8518, 15)
+[2026-04-05 22:54:11,814] 48 root - INFO - The numerical features are:
+['order_frequency', 'total_monetary_value', 'total_quantity_abs', 'total_order_issues', 'avg_order_value', 'avg_quantity_per_order', 'customer_order_issue_rate', 'recency', 'tenure', 'avg_stockcode_issue_rate', 'max_stockcode_issue_rate', 'total_orders_made_for_stock'] and the categoical features are:
+['country']
+[2026-04-05 22:54:11,815] 49 root - INFO - The dataset has 12 numerical features and 1 categorical features.
+[2026-04-05 22:54:11,815] 68 root - INFO - Dependent and independent features created. Independent: (8518, 13) and dependent: (8518,)
+[2026-04-05 22:54:11,836] 76 root - INFO - Independent feature saved at: Artifacts\pre_processing\full_dataset\X.parquet
+[2026-04-05 22:54:11,836] 77 root - INFO - Dependent features saved at: Artifacts\pre_processing\full_dataset\y.parquet
+[2026-04-05 22:54:11,836] 93 root - INFO - Creating the pre-processing file:
+[2026-04-05 22:54:11,852] 99 root - INFO - Preprocessor fitted successfully.
+ColumnTransformer(transformers=[('numerical', RobustScaler(),
+                                 ['order_frequency', 'total_monetary_value',
+                                  'total_quantity_abs', 'total_order_issues',
+                                  'avg_order_value', 'avg_quantity_per_order',
+                                  'customer_order_issue_rate', 'recency',
+                                  'tenure', 'avg_stockcode_issue_rate',
+                                  'max_stockcode_issue_rate',
+                                  'total_orders_made_for_stock']),
+                                ('categorical',
+                                 OneHotEncoder(handle_unknown='ignore',
+                                               sparse_output=False),
+                                 ['country'])])
+[2026-04-05 22:54:11,855] 106 root - INFO - Preprocessor saved to Artifacts\pre_processing\pre_processor.pkl
+[2026-04-05 22:54:11,855] 154 root - INFO - Pre-Processing Artifacts:
+PreProcessingArtifacts(pre_processor_file_path='Artifacts\\pre_processing\\pre_processor.pkl', X_path='Artifacts\\pre_processing\\full_dataset\\X.parquet', y_path='Artifacts\\pre_processing\\full_dataset\\y.parquet')
+[2026-04-05 22:54:11,856] 155 root - INFO - Pre-processor completed! | Total Execution Time: 0.001 min.

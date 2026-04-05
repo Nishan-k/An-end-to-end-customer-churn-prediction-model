@@ -1,9 +1,11 @@
 from src.customer_churn.config.configuration import (DataIngestionConfig, DataValidationConfig,
-                                                     DataCleaningConfig, FeatureEngineeringConfig)
+                                                     DataCleaningConfig, FeatureEngineeringConfig, 
+                                                     DataPreprocessingConfig)
 from src.customer_churn.components.data_ingestion import DataIngestion
 from src.customer_churn.components.data_validation import DataValidation
 from src.customer_churn.components.data_cleaning import DataCleaning
 from src.customer_churn.components.feature_engineering import FeatureEngineering
+from src.customer_churn.components.preprocessor import DataPreProcessing
 from src.customer_churn.utils.main_utils.common import read_yaml_file
 from src.customer_churn.logging.logger import log_separator
 from src.customer_churn.entity.artifact_entity import DataCleaningArtifacts
@@ -65,7 +67,7 @@ if __name__ == "__main__":
     feature_engineering = FeatureEngineering(feature_engineering_config=feature_engineering_config,
                                              data_cleaning_artifacts=combined_data_cleaning_artifacts,
                                              churn_cutoff_date=churn_cutoff_date)
-    feature_engineering_artifacts = feature_engineering.initiate_feature_engineering(branch_name='clipped')
+    feature_engineering_artifacts_clipped = feature_engineering.initiate_feature_engineering(branch_name='clipped')
     log_separator(section_name="Feature Engineering", stage="end")
 
     # # 4.2 For unclipped data:
@@ -74,10 +76,18 @@ if __name__ == "__main__":
     feature_engineering = FeatureEngineering(feature_engineering_config=feature_engineering_config,
                                              data_cleaning_artifacts=combined_data_cleaning_artifacts,
                                              churn_cutoff_date=churn_cutoff_date)
-    feature_engineering_artifacts = feature_engineering.initiate_feature_engineering(branch_name='unclipped')
+    feature_engineering_artifacts_unclipped = feature_engineering.initiate_feature_engineering(branch_name='unclipped')
     log_separator(section_name="Feature Engineering: unclipped dataset", stage="end")
     
 
+
+    # 5. Creating Pre-processor:
+    log_separator(section_name="Creating Pre-processor", stage="start")
+    pre_processing_config = DataPreprocessingConfig()
+    data_pre_processing = DataPreProcessing(data_pre_processing_config=pre_processing_config,
+                                            feature_engineering_artifacts=feature_engineering_artifacts_unclipped)
+    pre_processor_artifacts = data_pre_processing.initiate_pre_processor()
+    log_separator(section_name="Creating Pre-processor", stage="end")
 
     
 
