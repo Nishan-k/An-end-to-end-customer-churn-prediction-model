@@ -1,0 +1,24 @@
+[2026-04-06 20:49:50,387] 14 root - INFO - Reading YAML file from the path: params.yaml
+[2026-04-06 20:49:50,392] 21 root - INFO - ModelTraining class initialization completed!
+[2026-04-06 20:49:50,393] 92 root - INFO - Model Training Pipeline Trigerred.
+[2026-04-06 20:49:50,634] 37 root - INFO - Data loading success! | X:(8520, 13) | y: (8520,)
+[2026-04-06 20:49:50,768] 53 root - INFO - Pre-processor loading success!
+[2026-04-06 20:49:50,768] 61 root - INFO - Transforming data features using the saved preprocessor.
+[2026-04-06 20:49:50,789] 64 root - INFO - Training the full data on XGBoost.
+[2026-04-06 20:49:51,700] 70 root - INFO - Model Training Completed!
+[2026-04-06 20:49:51,713] 75 root - INFO - Final model saved to: Artifacts\model_training\final_model.pkl
+[2026-04-06 20:49:51,714] 102 root - INFO - Model Trainer Artifacts:
+ModelTrainerArtifacts(final_model_path='Artifacts\\model_training\\final_model.pkl')
+[2026-04-06 20:49:51,714] 103 root - INFO - Model Training Completed | Total Execution Time: 0.022 min.
+[2026-04-06 20:51:36,546] 14 root - INFO - Reading YAML file from the path: params.yaml
+[2026-04-06 20:51:36,551] 21 root - INFO - ModelTraining class initialization completed!
+[2026-04-06 20:51:36,551] 92 root - INFO - Model Training Pipeline Trigerred.
+[2026-04-06 20:51:36,581] 37 root - INFO - Data loading success! | X:(8520, 13) | y: (8520,)
+[2026-04-06 20:51:36,587] 53 root - INFO - Pre-processor loading success!
+[2026-04-06 20:51:36,587] 61 root - INFO - Transforming data features using the saved preprocessor.
+[2026-04-06 20:51:36,603] 64 root - INFO - Training the full data on XGBoost.
+[2026-04-06 20:51:37,346] 70 root - INFO - Model Training Completed!
+[2026-04-06 20:51:37,358] 75 root - INFO - Final model saved to: Artifacts\model_training\final_model.pkl
+[2026-04-06 20:51:37,360] 102 root - INFO - Model Trainer Artifacts:
+ModelTrainerArtifacts(final_model_path='Artifacts\\model_training\\final_model.pkl')
+[2026-04-06 20:51:37,360] 103 root - INFO - Model Training Completed | Total Execution Time: 0.013 min.

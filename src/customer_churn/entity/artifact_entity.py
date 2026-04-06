@@ -43,3 +43,9 @@ class PreProcessingArtifacts:
     pre_processor_file_path: str
     X_path: str
     y_path: str
+
+
+# 6. Model trainer artifacts:
+@dataclass
+class ModelTrainerArtifacts:
+    final_model_path: str

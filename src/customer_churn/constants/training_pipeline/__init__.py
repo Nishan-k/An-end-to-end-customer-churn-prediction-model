@@ -60,3 +60,10 @@ FEATURE_ENGINEERING_UNCLIPPED_DIR_NAME: str = "data_unclipped"
 PRE_PROCESSING_DIR_NAME: str= "pre_processing"
 PRE_PROCESSING_FILE_NAME: str = "pre_processor.pkl"
 PRE_PROCESSING_FULL_DATASET:str = "full_dataset"
+
+
+################################################
+# Constant variables for model training:
+################################################
+MODEL_TRAINING_DIR_NAME: str = "model_training"
+MODEL_TRAINING_FINAL_MODEL_NAME: str = "final_model.pkl"

@@ -93,4 +93,13 @@ class DataPreprocessingConfig:
                                                           training_pipeline.PRE_PROCESSING_FILE_NAME)
         self.pre_processing_full_data_dir:str = os.path.join(self.pre_processing_dir, training_pipeline.PRE_PROCESSING_FULL_DATASET)
 
+
+
+# Model Trainer Config:
+class ModelTrainingConfig:
+    def __init__(self):
+        self.model_training_dir: str = os.path.join(training_pipeline.ARTIFACT_DIR,
+                                                    training_pipeline.MODEL_TRAINING_DIR_NAME)
+        self.model_training_file_model_name: str = os.path.join(self.model_training_dir,
+                                                                training_pipeline.MODEL_TRAINING_FINAL_MODEL_NAME)
         
