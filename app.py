@@ -1,17 +1,28 @@
 import streamlit as st
 import pandas as pd
 from src.customer_churn.exception.exception import CustomerChurnException
+from src.customer_churn.components.shap_visualization import ShapVisualization
 import sys
 import requests
 
 
+
+
+#################################################
+# API endpoint:
+#################################################
 API_URL = "http://127.0.0.1:8000/"
 
+
+#################################################
 # Navigation section:
+#################################################
 page = st.sidebar.selectbox("Navigation Menu", ["🏠 Home", "📊 Predict", 
                                                 "📖 Explain", "📑 Generate Report", "ℹ️ About"], key="navigation_target")
 st.sidebar.markdown("**🔍 Navigate through the sections to explore customer churn insights!**")
 st.sidebar.markdown("")
+
+
 
 
 # 1. Home Page:
@@ -64,14 +75,50 @@ if page == "📊 Predict":
             }
 
             if st.button("Predict", type="primary"):
-                st.write(f"**Customer ID:** `{customer_id}`")
-                st.write("**Result:**")
-                response = requests.post(f"{API_URL}/predict", json=payload)
-                st.write(f"Status code: {response.status_code}")
-                st.write(f"Response text: {response.text}")
-                result = response.json()
-                st.write(result)
+                response = requests.post(f"{API_URL}/predict_single_feature", json=payload)
+                results = response.json()
+                # Store the session state:
+                st.session_state['prediction_results'] = results
+
+            if 'prediction_results' in st.session_state:
+                results = st.session_state['prediction_results']
                 
+                with st.expander("Raw API Response (For Debugging)"):
+                    st.json(results)
+
+                # Display prediction result:
+                st.subheader(f"Prediction For Customer: {customer_id}")
+                pred = results['prediction_results'][0]
+                prob_churn = pred['prediction_probability']
+                prob_retain = pred['retention_probability']
+
+                col1, col2 = st.columns(2)
+                col1.metric("Churn Probability", f"{prob_churn*100:.1f}%")
+                col2.metric("Retention Probability", f"{prob_retain*100:.1f}%")
+
+                st.progress(prob_churn, text=f"Churn risk level: {prob_churn*100:.1f}%")
+
+                if pred['prediction'] == "Stay":
+                    st.success("🟢 No Risk — Customer likely to stay")
+                else:
+                    st.error(f"🔴 {pred['risk_label']} — Customer likely to churn")
+
+                # SHAP visualization and Dataframe:
+                tab1, tab2 = st.tabs(["SHAP Visualization", "SHAP DataFrame"])
+                with tab1:
+                    # `ShapVisualization` class initialization:
+                    shap_visualization = ShapVisualization(results=results)          
+                    fig, net_shap, shap_df = shap_visualization.plot_shap_feature_importance()
+                    st.plotly_chart(fig)
+                    if net_shap < 0:
+                        st.info(f"📉 Net SHAP: {net_shap:.3f} → Retention signals dominate")
+                    else:
+                        st.warning(f"📈 Net SHAP: {net_shap:.3f} → Churn signals dominate")
+                with tab2:
+                    st.dataframe(shap_df.drop('Color', axis=1), use_container_width=True, height=400)
+                    st.caption("Negative SHAP = Decreases Churn Risk ↓, Positive SHAP = Increases churn risk ↑")
+                    csv = shap_df.drop('Color', axis=1).to_csv(index=False)
+                    st.download_button("Download SHAP data (CSV)", csv, "shap_values.csv", "text/csv")
         except Exception as e:
             raise CustomerChurnException(e, sys)
 
