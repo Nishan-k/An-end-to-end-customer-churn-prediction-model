@@ -8,7 +8,6 @@ from src.customer_churn.config.configuration import DataCleaningConfig, Training
 from src.customer_churn.logging.logger import logging
 from src.customer_churn.exception.exception import CustomerChurnException
 from src.customer_churn.utils.main_utils.common import read_yaml_file
-from src.customer_churn.logging.logger import log_separator
 import joblib
 import time
 import yaml

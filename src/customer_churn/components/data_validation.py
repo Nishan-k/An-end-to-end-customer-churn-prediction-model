@@ -1,8 +1,8 @@
-from src.customer_churn.config.configuration import TrainingPipelineConfig, DataValidationConfig
+from src.customer_churn.config.configuration import DataValidationConfig
 from src.customer_churn.entity.artifact_entity import DataIngestionArtifacts, DataValidationArtifacts   
 from src.customer_churn.exception.exception import CustomerChurnException
-from src.customer_churn.logging.logger import log_separator, logging
-from src.customer_churn.utils.main_utils.common import read_yaml_file, read_parquet_file
+from src.customer_churn.logging.logger import logging
+from src.customer_churn.utils.main_utils.common import read_yaml_file
 import sys
 import pandas as pd
 from scipy.stats import ks_2samp
@@ -123,8 +123,8 @@ class DataValidation:
         """
         starting_time = time.perf_counter()
         logging.info("Data Validation Pipeline Started:")
-        self.train_df = read_parquet_file(self.train_file_path)
-        self.test_df = read_parquet_file(self.test_file_path)
+        self.train_df = pd.read_parquet(self.train_file_path)
+        self.test_df = pd.read_parquet(self.test_file_path)
 
         try:          
             # Validate number of columns:

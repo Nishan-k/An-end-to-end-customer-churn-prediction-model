@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 from dotenv import load_dotenv
 import time
 import os
-from typing import Optional
+
 
 
 # Load .env values:

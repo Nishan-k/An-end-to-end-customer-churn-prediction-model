@@ -79,7 +79,7 @@ class ModelTraining:
             os.makedirs(self.model_training_config.model_training_dir, exist_ok=True)
             joblib.dump(final_model, self.model_file_path)
             logging.info(f"Final model saved to: {self.model_file_path}")
-            return final_model, self.model_file_path           
+            return self.model_file_path           
         except Exception as e:
             raise CustomerChurnException(e, sys)
 
@@ -98,7 +98,7 @@ class ModelTraining:
             logging.info("Model Training Pipeline Trigerred.")
             X, y = self.load_data()
             pre_processor = self.load_pre_processor()
-            final_model, model_file_path = self.train_and_save_model(pre_processor=pre_processor, X=X, y=y)
+            model_file_path = self.train_and_save_model(pre_processor=pre_processor, X=X, y=y)
             model_trainer_artifacts = ModelTrainerArtifacts(
                 final_model_path=model_file_path
             )
