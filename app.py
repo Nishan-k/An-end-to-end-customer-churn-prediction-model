@@ -2,10 +2,16 @@ import streamlit as st
 import pandas as pd
 from src.customer_churn.exception.exception import CustomerChurnException
 from src.customer_churn.components.shap_visualization import ShapVisualization
+from src.customer_churn.llm.report_generation import report_generation
 import sys
 import requests
 
 
+#################################################
+# Session initialization for LLM report:
+#################################################
+if 'llm_report_ready' not in st.session_state:
+    st.session_state['llm_report_ready'] = False
 
 
 #################################################
@@ -18,7 +24,7 @@ API_URL = "http://127.0.0.1:8000/"
 # Navigation section:
 #################################################
 page = st.sidebar.selectbox("Navigation Menu", ["🏠 Home", "📊 Predict", 
-                                                "📖 Explain", "📑 Generate Report", "ℹ️ About"], key="navigation_target")
+                                                "📑 Generate Report", "ℹ️ About"], key="navigation_target")
 st.sidebar.markdown("**🔍 Navigate through the sections to explore customer churn insights!**")
 st.sidebar.markdown("")
 
@@ -27,7 +33,34 @@ st.sidebar.markdown("")
 
 # 1. Home Page:
 if page == "🏠 Home":
-    st.write("Home Page")
+    st.title("🛒 Customer Churn Prediction for E‑commerce")
+    st.markdown("""
+    ### Predict, Explain, and Act – End‑to‑End ML Pipeline
+
+    Welcome to the **Customer Churn Prediction System**.  
+    This application helps you:
+    - ✅ **Predict** whether a customer will churn based on 13 key features.
+    - 📊 **Explain** predictions using SHAP values (interactive charts).
+    - 📄 **Generate** AI‑powered business reports (OpenAI GPT‑4o‑mini).
+    - 💡 **Recommend** retention actions tailored to each customer.
+
+    **How it works:**  
+    1. Go to the **Predict** page → enter customer features (or upload a file – coming soon).  
+    2. Get instant churn probability and risk label.  
+    3. Explore SHAP contributions and download an AI‑generated PDF report.  
+
+    🚀 Built with **XGBoost**, **FastAPI**, **Streamlit**, **SHAP**, and **OpenAI**.
+    """)
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Model F1 Score", "84.9%", "on test set")
+    with col2:
+        st.metric("Recall (Churn)", "98.8%", "catches almost all churners")
+    with col3:
+        st.metric("Cost Savings", "~96%", "vs no model")
+    
+    st.markdown("---")
+    st.markdown("**👉 Ready to start?** Go to the **📊 Predict** page in the sidebar.")
 
 
 
@@ -36,9 +69,9 @@ if page == "📊 Predict":
     st.title("Customer Churn Prediction")
     st.markdown("Enter customer details below to predict churn risk:")
     st.markdown("----")
-    tab1, tab2 = st.tabs(["Manual Input-DEMO VERSION", "Upload Transactions"])
+    manual_input_tab1, batch_tab2 = st.tabs(["Manual Input-DEMO VERSION", "Upload Transactions"])
 
-    with tab1:
+    with manual_input_tab1:
         customer_id = st.number_input(label="Customer ID", min_value=1, value=120)
         col1, col2 = st.columns(2)
         with col1:
@@ -77,8 +110,12 @@ if page == "📊 Predict":
             if st.button("Predict", type="primary"):
                 response = requests.post(f"{API_URL}/predict_single_feature", json=payload)
                 results = response.json()
+                # Update the session state for LLM report:
+                st.session_state['llm_report_ready'] = True
                 # Store the session state:
                 st.session_state['prediction_results'] = results
+                # Session storage for customerid:
+                st.session_state['customer_id'] = customer_id
 
             if 'prediction_results' in st.session_state:
                 results = st.session_state['prediction_results']
@@ -93,10 +130,10 @@ if page == "📊 Predict":
                 prob_retain = pred['retention_probability']
 
                 col1, col2 = st.columns(2)
-                col1.metric("Churn Probability", f"{prob_churn*100:.1f}%")
-                col2.metric("Retention Probability", f"{prob_retain*100:.1f}%")
+                col1.metric("Churn Probability", f"{prob_churn*100:.2f}%")
+                col2.metric("Retention Probability", f"{prob_retain*100:.2f}%")
 
-                st.progress(prob_churn, text=f"Churn risk level: {prob_churn*100:.1f}%")
+                st.progress(prob_churn, text=f"Churn risk level: {prob_churn*100:.2f}%")
 
                 if pred['prediction'] == "Stay":
                     st.success("🟢 No Risk — Customer likely to stay")
@@ -104,8 +141,8 @@ if page == "📊 Predict":
                     st.error(f"🔴 {pred['risk_label']} — Customer likely to churn")
 
                 # SHAP visualization and Dataframe:
-                tab1, tab2 = st.tabs(["SHAP Visualization", "SHAP DataFrame"])
-                with tab1:
+                shab_tab, shap_df_tab = st.tabs(["SHAP Visualization", "SHAP DataFrame"])
+                with shab_tab:
                     # `ShapVisualization` class initialization:
                     shap_visualization = ShapVisualization(results=results)          
                     fig, net_shap, shap_df = shap_visualization.plot_shap_feature_importance()
@@ -114,25 +151,45 @@ if page == "📊 Predict":
                         st.info(f"📉 Net SHAP: {net_shap:.3f} → Retention signals dominate")
                     else:
                         st.warning(f"📈 Net SHAP: {net_shap:.3f} → Churn signals dominate")
-                with tab2:
-                    st.dataframe(shap_df.drop('Color', axis=1), use_container_width=True, height=400)
+                with shap_df_tab:
+                    display_df = shap_df.drop('Color', axis=1).copy()
+                    display_df['Input_features'] = display_df['Input_features'].astype(str)
+                    st.dataframe(display_df, use_container_width=True, height=400)
                     st.caption("Negative SHAP = Decreases Churn Risk ↓, Positive SHAP = Increases churn risk ↑")
-                    csv = shap_df.drop('Color', axis=1).to_csv(index=False)
+                    csv = display_df.to_csv(index=False)
                     st.download_button("Download SHAP data (CSV)", csv, "shap_values.csv", "text/csv")
+
+                # To reset the session:        
+                if st.button("Reset Session", type="primary"):
+                    if 'prediction_results' in st.session_state:
+                        del st.session_state['prediction_results']
+                    st.rerun()
         except Exception as e:
             raise CustomerChurnException(e, sys)
+    
+    with batch_tab2:
+        st.info("🚧 **Batch prediction via CSV upload is under development.** In the future, " \
+        "you will be able to upload raw transaction files (with original features like invoice, stock code, etc.) "
+        "and the system will automatically generate all engineered features before predicting. " \
+        "For now, please use the **Manual Input** tab to test the model.")
+
 
 
         
 
-# 3. Explain Page:
-if page == "📖 Explain":
-     st.write("Explain Page")
 
-# 4. LLM Report Generation:
+# 3. LLM Report Generation:
 if page == "📑 Generate Report":
-    st.write("LLM Report Generation Page")
+   if st.session_state.get('llm_report_ready', False):
+       # Retrieve the prediction results from the session 'prediction_results':
+       results = st.session_state.get('prediction_results')
+       if results:
+           report_generation()
+       else:
+           st.warning("No prediction data found. Please make a prediction first.")
+   else:
+       st.info("Please go to the **Predict** page and run a prediction first.")
 
-# 5. About Page:
+# 4. About Page:
 if page == "ℹ️ About":
     st.write("About Page")
