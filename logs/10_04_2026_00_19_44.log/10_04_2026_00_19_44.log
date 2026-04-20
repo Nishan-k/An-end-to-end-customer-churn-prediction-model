@@ -1,0 +1,9 @@
+[2026-04-10 00:19:46,143] 20 root - INFO - Prediction class initialization success!
+[2026-04-10 00:19:52,118] 35 root - INFO - Provided features for prediction:
+   order_frequency  total_monetary_value  ...  max_stockcode_issue_rate  total_orders_made_for_stock
+0               25                -850.0  ...                      1.02                        195.0
+
+[1 rows x 13 columns]
+[2026-04-10 00:19:52,125] 37 root - INFO - Features transformation success!
+[2026-04-10 00:19:52,131] 54 root - INFO - The result of the prediction:
+[{'prediction_probability': 0.4415, 'prediction': 'Stay', 'risk_label': 'No Risk'}]

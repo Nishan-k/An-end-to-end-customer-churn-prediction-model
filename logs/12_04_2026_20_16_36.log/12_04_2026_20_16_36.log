@@ -1,0 +1,7 @@
+[2026-04-12 20:16:39,947] 20 root - INFO - Prediction class initialization success!
+[2026-04-12 20:16:40,619] 35 root - INFO - Provided features for prediction:
+   order_frequency  total_monetary_value  total_quantity_abs  total_order_issues         country  avg_order_value  avg_quantity_per_order  customer_order_issue_rate  recency  tenure  avg_stockcode_issue_rate  max_stockcode_issue_rate  total_orders_made_for_stock
+0               25                -850.0                  10                   8  United Kingdom           -850.0                   250.0                       13.0       25      97                       1.0                      1.02                        195.0
+[2026-04-12 20:16:40,624] 37 root - INFO - Features transformation success!
+[2026-04-12 20:16:40,629] 54 root - INFO - The result of the prediction:
+[{'prediction_probability': 0.4415, 'prediction': 'Stay', 'risk_label': 'No Risk'}]

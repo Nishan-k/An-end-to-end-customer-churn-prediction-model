@@ -1,0 +1,31 @@
+[2026-04-11 13:40:36,689] 20 root - INFO - Prediction class initialization success!
+[2026-04-11 13:41:15,482] 35 root - INFO - Provided features for prediction:
+   order_frequency  total_monetary_value  total_quantity_abs  total_order_issues         country  avg_order_value  avg_quantity_per_order  customer_order_issue_rate  recency  tenure  avg_stockcode_issue_rate  max_stockcode_issue_rate  total_orders_made_for_stock
+0               25                -850.0                  10                   8  United Kingdom           -850.0                   250.0                       13.0       25      97                       1.0                      1.02                        195.0
+[2026-04-11 13:41:15,498] 37 root - INFO - Features transformation success!
+[2026-04-11 13:41:15,505] 54 root - INFO - The result of the prediction:
+[{'prediction_probability': 0.4415, 'prediction': 'Stay', 'risk_label': 'No Risk'}]
+[2026-04-11 13:48:14,093] 35 root - INFO - Provided features for prediction:
+   order_frequency  total_monetary_value  total_quantity_abs  total_order_issues  country  avg_order_value  avg_quantity_per_order  customer_order_issue_rate  recency  tenure  avg_stockcode_issue_rate  max_stockcode_issue_rate  total_orders_made_for_stock
+0               25                -850.0                  10                   8  Germany           -850.0                   250.0                       13.0       25      97                       1.0                      1.02                        195.0
+[2026-04-11 13:48:14,097] 37 root - INFO - Features transformation success!
+[2026-04-11 13:48:14,101] 54 root - INFO - The result of the prediction:
+[{'prediction_probability': 0.4312, 'prediction': 'Stay', 'risk_label': 'No Risk'}]
+[2026-04-11 13:48:30,933] 35 root - INFO - Provided features for prediction:
+   order_frequency  total_monetary_value  total_quantity_abs  total_order_issues  country  avg_order_value  avg_quantity_per_order  customer_order_issue_rate  recency  tenure  avg_stockcode_issue_rate  max_stockcode_issue_rate  total_orders_made_for_stock
+0               25                -850.0                  10                   8  Germany           -850.0                   250.0                       13.0       25      97                       1.0                      1.02                        195.0
+[2026-04-11 13:48:30,936] 37 root - INFO - Features transformation success!
+[2026-04-11 13:48:30,938] 54 root - INFO - The result of the prediction:
+[{'prediction_probability': 0.4312, 'prediction': 'Stay', 'risk_label': 'No Risk'}]
+[2026-04-11 16:25:55,675] 35 root - INFO - Provided features for prediction:
+   order_frequency  total_monetary_value  total_quantity_abs  total_order_issues  country  avg_order_value  avg_quantity_per_order  customer_order_issue_rate  recency  tenure  avg_stockcode_issue_rate  max_stockcode_issue_rate  total_orders_made_for_stock
+0               25                -850.0                  10                   8  Germany           -850.0                   250.0                       13.0       25      97                       1.0                      1.02                        195.0
+[2026-04-11 16:25:55,692] 37 root - INFO - Features transformation success!
+[2026-04-11 16:25:55,699] 54 root - INFO - The result of the prediction:
+[{'prediction_probability': 0.4312, 'prediction': 'Stay', 'risk_label': 'No Risk'}]
+[2026-04-11 16:35:06,633] 35 root - INFO - Provided features for prediction:
+   order_frequency  total_monetary_value  total_quantity_abs  total_order_issues  country  avg_order_value  avg_quantity_per_order  customer_order_issue_rate  recency  tenure  avg_stockcode_issue_rate  max_stockcode_issue_rate  total_orders_made_for_stock
+0               25                -850.0                  10                   8  Germany           -850.0                   250.0                       13.0       25      97                       1.0                      1.02                        195.0
+[2026-04-11 16:35:06,637] 37 root - INFO - Features transformation success!
+[2026-04-11 16:35:06,640] 54 root - INFO - The result of the prediction:
+[{'prediction_probability': 0.4312, 'prediction': 'Stay', 'risk_label': 'No Risk'}]

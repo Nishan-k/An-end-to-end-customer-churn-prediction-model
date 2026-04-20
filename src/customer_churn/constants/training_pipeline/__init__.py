@@ -67,3 +67,10 @@ PRE_PROCESSING_FULL_DATASET:str = "full_dataset"
 ################################################
 MODEL_TRAINING_DIR_NAME: str = "model_training"
 MODEL_TRAINING_FINAL_MODEL_NAME: str = "final_model.pkl"
+
+
+################################################
+# Constant variables for FastAPI Endpoint:
+################################################
+
+API_URL = "http://127.0.0.1:8000/"

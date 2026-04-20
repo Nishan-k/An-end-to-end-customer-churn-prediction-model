@@ -1,0 +1,19 @@
+[2026-04-13 15:49:08,346] 20 root - INFO - Prediction class initialization success!
+[2026-04-13 15:51:19,205] 35 root - INFO - Provided features for prediction:
+   order_frequency  total_monetary_value  total_quantity_abs  total_order_issues         country  avg_order_value  avg_quantity_per_order  customer_order_issue_rate  recency  tenure  avg_stockcode_issue_rate  max_stockcode_issue_rate  total_orders_made_for_stock
+0               25                -850.0                  10                   8  United Kingdom           -850.0                   250.0                       13.0       25      97                       1.0                      1.02                        195.0
+[2026-04-13 15:51:19,209] 37 root - INFO - Features transformation success!
+[2026-04-13 15:51:19,223] 56 root - INFO - The result of the prediction:
+[{'prediction_probability': 0.4415, 'retention_probability': 0.5585, 'prediction': 'Stay', 'risk_label': 'No Risk'}]
+[2026-04-13 19:14:59,485] 35 root - INFO - Provided features for prediction:
+   order_frequency  total_monetary_value  total_quantity_abs  total_order_issues         country  avg_order_value  avg_quantity_per_order  customer_order_issue_rate  recency  tenure  avg_stockcode_issue_rate  max_stockcode_issue_rate  total_orders_made_for_stock
+0               25                -850.0                  10                   8  United Kingdom           -850.0                   250.0                       13.0       25      97                       1.0                      1.02                        195.0
+[2026-04-13 19:14:59,492] 37 root - INFO - Features transformation success!
+[2026-04-13 19:14:59,495] 56 root - INFO - The result of the prediction:
+[{'prediction_probability': 0.4415, 'retention_probability': 0.5585, 'prediction': 'Stay', 'risk_label': 'No Risk'}]
+[2026-04-13 19:15:10,476] 35 root - INFO - Provided features for prediction:
+   order_frequency  total_monetary_value  total_quantity_abs  total_order_issues         country  avg_order_value  avg_quantity_per_order  customer_order_issue_rate  recency  tenure  avg_stockcode_issue_rate  max_stockcode_issue_rate  total_orders_made_for_stock
+0               25                -850.0                  10                   8  United Kingdom           -850.0                   250.0                       13.0       25      97                       1.0                      1.02                        195.0
+[2026-04-13 19:15:10,480] 37 root - INFO - Features transformation success!
+[2026-04-13 19:15:10,482] 56 root - INFO - The result of the prediction:
+[{'prediction_probability': 0.4415, 'retention_probability': 0.5585, 'prediction': 'Stay', 'risk_label': 'No Risk'}]

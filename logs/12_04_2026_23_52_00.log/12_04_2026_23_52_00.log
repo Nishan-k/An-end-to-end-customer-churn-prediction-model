@@ -1,0 +1,7 @@
+[2026-04-12 23:52:02,933] 20 root - INFO - Prediction class initialization success!
+[2026-04-12 23:52:03,583] 35 root - INFO - Provided features for prediction:
+   order_frequency  total_monetary_value  total_quantity_abs  total_order_issues         country  avg_order_value  avg_quantity_per_order  customer_order_issue_rate  recency  tenure  avg_stockcode_issue_rate  max_stockcode_issue_rate  total_orders_made_for_stock
+0               10                -850.0                  10                   8  United Kingdom           -850.0                   12.98                       18.0     2120       2                       1.0                      1.02                        195.0
+[2026-04-12 23:52:03,586] 37 root - INFO - Features transformation success!
+[2026-04-12 23:52:03,592] 56 root - INFO - The result of the prediction:
+[{'prediction_probability': 0.6211, 'retention_probability': 0.3789, 'prediction': 'Churn', 'risk_label': 'Low Risk'}]

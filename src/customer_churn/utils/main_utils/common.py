@@ -34,21 +34,7 @@ def write_yaml_file(file_path:str, content:object, replace:bool=False) -> None:
         raise CustomerChurnException(e, sys)
 
 
-# 3. Read the parquet file and return as df:
-def read_parquet_file(file_path: str) -> pd.DataFrame:
-    """
-    Takes in the file path of parquet file, reads it and returns a DF:
-    """
-    try:
-        df = pd.read_parquet(file_path)
-        return df
-    except Exception as e:
-        raise CustomerChurnException(e, sys)
-
-
-
-
-# 4. Standardize the column names:
+# 3. Standardize the column names:
 def standardize_column_names(df:pd.DataFrame) -> pd.DataFrame:
     """
     Rename the column names to match the defined schema for data validation(lower-case and no spaces)
