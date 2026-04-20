@@ -3,8 +3,14 @@ import requests
 import sys
 from src.customer_churn.exception.exception import CustomerChurnException
 from src.customer_churn.components.shap_visualization import ShapVisualization
-from src.customer_churn.constants.training_pipeline import API_URL
+# from src.customer_churn.constants.training_pipeline import API_URL
+from dotenv import load_dotenv
+import os
 
+
+
+load_dotenv()
+API_BASE_URL = os.getenv("API_BASE_URL")
 
 def predict():
     st.title("Customer Churn Prediction")
@@ -49,7 +55,7 @@ def predict():
             }
 
             if st.button("Predict", type="primary"):
-                response = requests.post(f"{API_URL}/predict_single_feature", json=payload)
+                response = requests.post(f"{API_BASE_URL}/predict_single_feature", json=payload)
                 results = response.json()
                 # Update the session state for LLM report:
                 st.session_state['llm_report_ready'] = True
