@@ -15,7 +15,7 @@ def about():
         """)
 
     with st.expander("🏗️ Architecture Overview"):
-        # st.image("docs/architecture.png", caption="End‑to‑end ML pipeline", use_container_width=True)
+        st.image("architecture/Churn_arch.png", caption="End‑to‑end ML pipeline", use_container_width=True)
         st.markdown("""
         - **Data Ingestion** → MongoDB → Parquet feature store.  
         - **Data Validation** → schema check (columns, dtypes).  
