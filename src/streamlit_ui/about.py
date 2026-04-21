@@ -22,7 +22,7 @@ def about():
         - **Feature Engineering** → RFM, product‑level risk scores, customer‑level aggregates.  
         - **Model Training** → XGBoost with hyperparameter tuning (MLflow).  
         - **API** → FastAPI serves predictions + SHAP explanations.  
-        - **UI** → Streamlit for manual input, SHAP plots, LLM reports.  
+        - **UI** → Streamlit for manual input for prediction, SHAP plots and values dowloadable as CSV file, LLM reports, and downloadable LLM report as a PDF file.  
         - **Deployment** → Streamlit (UI), Render(Backend), and Corn-Job(Pings /health every 5 minutes) to stop Render from freezing.
         """)
 
@@ -30,7 +30,7 @@ def about():
         st.markdown("""
         - **Spot-Checking Algorithms(Total 9 algorithms)**: LogisticRegression, DecisionTreeClassifier, RandomForestClassifier, ExtraTreesClassifier
                      GradientBoostingClassifier, XGBClassifier, KNeighborsClassifier, LinearDiscriminantAnalysis, and SVC.
-        - **Mlflow Experiment tracked(Total 5 Alogrithms) **: GradientBoostingClassifier, SVC, RandomForestClassifier, ExtraTreesClassifier, and
+        - **Mlflow Experiment tracked(Total 5 Alogrithms)**: GradientBoostingClassifier, SVC, RandomForestClassifier, ExtraTreesClassifier, and
                     XGBClassifier.
         - **Two data branches**: clipped (outliers capped at 99th percentile) vs. unclipped.  
         - **Winner**: XGBClassifier on **unclipped** data.  
@@ -38,7 +38,7 @@ def about():
           - F1 = 84.81%  
           - Recall (churn) = 98.81%  
           - Precision (churn) = 72.96%  
-        - **Business‑driven selection**: Used cost of false positives (€5) vs. false negatives (€200). XGBoost unclipped minimised a total cost of €17,270.
+        - **Business‑driven selection**: Used cost of false positives (€5) vs. false negatives (€200). XGBoost unclipped with the minimal possible risk of €17,270.
         """)
 
     with st.expander("🛠️ Tech Stack"):
@@ -49,7 +49,7 @@ def about():
             st.markdown("**DevOps & Deployment**\n- FastAPI / Uvicorn\n- Streamlit\n- Render\n- Cron-Job \n- Git / DagsHub")
 
     with st.expander("🚀 Future Improvements"):
-        st.markdown("""
+        st.markdown("""nimised a
         - Batch prediction (CSV upload with automatic feature engineering).  
         - CI/CD pipeline (GitHub Actions).  
         - Automated retraining with Apache Airflow.  
