@@ -44,7 +44,7 @@ def about():
     with st.expander("🛠️ Tech Stack"):
         col1, col2 = st.columns(2)
         with col1:
-            st.markdown("**Data & ML**\n- pandas / NumPy\n- scikit‑learn\n- XGBoost\n- SHAP\n- MLflow\n -Plotly")
+            st.markdown("**Data & ML**\n- pandas / NumPy\n- scikit‑learn\n- XGBoost\n- SHAP\n- MLflow\n- Plotly")
         with col2:
             st.markdown("**DevOps & Deployment**\n- FastAPI / Uvicorn\n- Streamlit\n- Render\n- Corn-Job \n- Git / DagsHub")
 
