@@ -46,7 +46,7 @@ def about():
         with col1:
             st.markdown("**Data & ML**\n- pandas / NumPy\n- scikit‑learn\n- XGBoost\n- SHAP\n- MLflow\n- Plotly")
         with col2:
-            st.markdown("**DevOps & Deployment**\n- FastAPI / Uvicorn\n- Streamlit\n- Render\n- Corn-Job \n- Git / DagsHub")
+            st.markdown("**DevOps & Deployment**\n- FastAPI / Uvicorn\n- Streamlit\n- Render\n- Cron-Job \n- Git / DagsHub")
 
     with st.expander("🚀 Future Improvements"):
         st.markdown("""
