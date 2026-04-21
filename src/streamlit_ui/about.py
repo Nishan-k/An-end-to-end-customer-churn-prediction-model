@@ -58,4 +58,6 @@ def about():
         """)
 
     st.markdown("---")
-    st.markdown("**👤 Author** – Nishan Karki  \n🔗 [GitHub Repository](https://github.com/Nishan-k/An-end-to-end-customer-churn-prediction-model) \n🔗 [Tableau](https://public.tableau.com/app/profile/nishan.karki/vizzes)")
+    st.markdown("**👤 Author** – Nishan Karki")
+    st.markdown("🔗 [GitHub Repository](https://github.com/Nishan-k/An-end-to-end-customer-churn-prediction-model)")
+    st.markdown("🔗 [Tableau](https://public.tableau.com/app/profile/nishan.karki/vizzes)")
