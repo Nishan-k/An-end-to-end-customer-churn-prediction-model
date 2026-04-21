@@ -38,7 +38,7 @@ def about():
           - F1 = 84.81%  
           - Recall (churn) = 98.81%  
           - Precision (churn) = 72.96%  
-        - **Business‑driven selection**: Used cost of false positives (€5) vs. false negatives (€200). XGBoost unclipped with the minimal possible risk of €17,270.
+        - **Business‑driven selection**: Used cost of false positives (€5) vs. false negatives (€200). XGBoost classifier on unclipped dataset with the minimal possible risk of €17,270.
         """)
 
     with st.expander("🛠️ Tech Stack"):
@@ -49,7 +49,7 @@ def about():
             st.markdown("**DevOps & Deployment**\n- FastAPI / Uvicorn\n- Streamlit\n- Render\n- Cron-Job \n- Git / DagsHub")
 
     with st.expander("🚀 Future Improvements"):
-        st.markdown("""nimised a
+        st.markdown("""
         - Batch prediction (CSV upload with automatic feature engineering).  
         - CI/CD pipeline (GitHub Actions).  
         - Automated retraining with Apache Airflow.  
@@ -58,4 +58,4 @@ def about():
         """)
 
     st.markdown("---")
-    st.markdown("**👤 Author** – Nishan Karki  \n🔗 [GitHub Repository](https://github.com/Nishan-k/An-end-to-end-customer-churn-prediction-model)")
+    st.markdown("**👤 Author** – Nishan Karki  \n🔗 [GitHub Repository](https://github.com/Nishan-k/An-end-to-end-customer-churn-prediction-model) \n🔗 [Tableau](https://public.tableau.com/app/profile/nishan.karki/vizzes)")
