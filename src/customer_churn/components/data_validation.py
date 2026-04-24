@@ -2,10 +2,10 @@ from src.customer_churn.config.configuration import DataValidationConfig
 from src.customer_churn.entity.artifact_entity import DataIngestionArtifacts, DataValidationArtifacts   
 from src.customer_churn.exception.exception import CustomerChurnException
 from src.customer_churn.logging.logger import logging
-from src.customer_churn.utils.main_utils.common import read_yaml_file
+from src.customer_churn.utils.main_utils.common import read_yaml_file, write_yaml_file
 import sys
 import pandas as pd
-from scipy.stats import ks_2samp
+from scipy.stats import ks_2samp, chi2_contingency
 import time
 import os
 
@@ -81,10 +81,47 @@ class DataValidation:
                 raise CustomerChurnException(e, sys)
             raise
     
+
+    def detect_data_drift(self, base_df, current_df, threshold=0.05):
+        """
+        Compares the distribution of train(base) and test(current) data,
+        writes the report as yaml file and logs any difted columns:
+        """
+
+        try:
+            report = {}
+            for col in base_df.columns:
+                d1 = base_df[col].dropna()        
+                d2 = current_df[col].dropna()
+                if d1.dtype in ['int64', 'float64']:
+                    # For numerical use: KS2samp:
+                    stat, p = ks_2samp(d1, d2)
+                    test_used = "Ks_2samp"
+                else:
+                    # To handle categorical data:
+                    all_cats = sorted(set(d1) | set(d2))
+                    freq1 = d1.value_counts().reindex(all_cats, fill_value=0)
+                    freq2 = d2.value_counts().reindex(all_cats, fill_value=0)
+                    _, p, _, _ = chi2_contingency([freq1, freq2])
+                    test_used = "chi2"
+                has_data_drift = p < threshold
+                has_data_drift = bool(has_data_drift)
+                report[col] = {'p_value': float(p), 'has_drift': has_data_drift, 'test': test_used}           
+            drift_report_file_path = self.data_validation_config.drift_report_file_path
+            os.makedirs(os.path.dirname(drift_report_file_path), exist_ok=True)
+            write_yaml_file(file_path=drift_report_file_path, content=report)
+            drifted_cols = [col for col, info in report.items() if info['has_drift']]
+
+            if drifted_cols:
+                logging.warning(f"Data drift detected in columns: {drifted_cols}")
+        except Exception as e:
+            raise CustomerChurnException(e, sys)
+    
     def get_artifacts(self, data_valid_status: bool) -> DataValidationArtifacts:
         if data_valid_status:
                 valid_train_path = self.data_validation_config.valid_train_file_path
                 valid_test_path = self.data_validation_config.valid_test_file_path
+                drift_report_file_path = self.data_validation_config.drift_report_file_path
                 os.makedirs(os.path.dirname(valid_train_path), exist_ok=True)
                 os.makedirs(os.path.dirname(valid_test_path), exist_ok=True)
                 self.train_df.to_parquet(valid_train_path)
@@ -95,7 +132,7 @@ class DataValidation:
                     valid_test_file_path=valid_test_path,
                     invalid_train_file_path=None,
                     invalid_test_file_path=None,
-                    drift_report_file_path=None
+                    drift_report_file_path=drift_report_file_path
                 )
                 return data_validation_artifacts
         else:
@@ -135,8 +172,12 @@ class DataValidation:
             train_dtype_status = self.are_dtypes_valid(df=self.train_df, df_name='Training')     
             test_dtype_status = self.are_dtypes_valid(df=self.test_df, df_name='Testing')
 
+
+
             # Prepare for the artifacts:
             if train_col_status and test_col_status and train_dtype_status and test_dtype_status:
+                # Check the data drift:
+                self.detect_data_drift(base_df=self.train_df, current_df=self.test_df)
                 data_validation_artifacts = self.get_artifacts(data_valid_status=True)
             else:
                 data_validation_artifacts = self.get_artifacts(data_valid_status=False)

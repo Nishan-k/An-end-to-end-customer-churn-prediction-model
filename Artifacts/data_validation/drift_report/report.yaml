@@ -1,0 +1,32 @@
+country:
+  has_drift: true
+  p_value: 0.031135664213930735
+  test: chi2
+customerid:
+  has_drift: false
+  p_value: 0.48523239519641226
+  test: Ks_2samp
+description:
+  has_drift: false
+  p_value: 0.5774879322100398
+  test: chi2
+invoice:
+  has_drift: false
+  p_value: 0.6707703837395619
+  test: chi2
+invoicedate:
+  has_drift: false
+  p_value: 0.7815891045676399
+  test: chi2
+price:
+  has_drift: false
+  p_value: 0.9616919570017399
+  test: Ks_2samp
+quantity:
+  has_drift: false
+  p_value: 0.964967026485706
+  test: Ks_2samp
+stockcode:
+  has_drift: false
+  p_value: 0.44582711254310037
+  test: chi2
