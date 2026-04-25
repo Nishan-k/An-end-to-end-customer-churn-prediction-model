@@ -28,7 +28,7 @@ def about():
 
     with st.expander("🧪 Experiments & Model Selection"):
         st.markdown("""
-        - **Spot-Checking Algorithms(Total 9 algorithms)**: LogisticRegression, DecisionTreeClassifier, RandomForestClassifier, ExtraTreesClassifier
+        - **Spot-Checking Algorithms(Total 9 algorithms)**: LogisticRegression, DecisionTreeClassifier, RandomForestClassifier, ExtraTreesClassifier,
                      GradientBoostingClassifier, XGBClassifier, KNeighborsClassifier, LinearDiscriminantAnalysis, and SVC.
         - **Mlflow Experiment tracked(Total 5 Alogrithms)**: GradientBoostingClassifier, SVC, RandomForestClassifier, ExtraTreesClassifier, and
                     XGBClassifier.
