@@ -250,8 +250,6 @@ hyperparameters identified during experimentation.
 │       ├── predict.py
 │       ├── generate_report.py
 │       └── about.py
-├── templates/
-│   └── index.html
 ├── api.py          ← FastAPI backend entry point
 ├── app.py          ← Streamlit frontend entry point
 ├── main.py         ← Full training pipeline runner
@@ -283,11 +281,10 @@ venv\Scripts\activate           # Windows
 # 3. Install dependencies
 pip install -r requirements.txt
 
-# 4. **Set up environment variables**:
-
-    Create a `.env` file in the project root with:
-    - OPENAI_API_KEY=your_openai_key_here
-    - API_BASE_URL=http://localhost:8000
+# 4. Set up environment variables:
+Create a `.env` file in the project root with:
+    1. OPENAI_API_KEY=your_openai_key_here
+    2. API_BASE_URL=http://localhost:8000
 
 
 # 5. Run FastAPI backend (in one terminal)
