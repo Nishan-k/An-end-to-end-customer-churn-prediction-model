@@ -170,6 +170,7 @@ hyperparameters identified during experimentation.
 ```
 ├── .github/
 │   └── workflows/
+        └── keep_streamlit_alive.yml     ← schedules a headless browser
 ├── architecture/
 │   ├── Churn_arch.drawio
 │   └── churn_architecture.png
@@ -255,9 +256,9 @@ hyperparameters identified during experimentation.
 ├── app.py          ← Streamlit frontend entry point
 ├── main.py         ← Full training pipeline runner
 ├── params.yaml     ← Model parameters and pipeline config
+├── wake_streamlit.js ← To simulate a real user to keep Streamlit UI alive
 ├── push_data.py
 ├── requirements.txt   ← Python dependencies
-├── setup.py
 └──templates.py   ← To automate the project template creation
 ```
 
