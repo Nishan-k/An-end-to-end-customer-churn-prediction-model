@@ -152,6 +152,9 @@ minimising total business cost rather than model metrics alone.
 <h2 id='mlpipeline'>8. ML Pipeline Components</h2>
 The pipeline is fully modular and reproducible:
 
+
+![App Screenshot](architecture/churn_architecture.png)
+
 1. <b> Push Data:</b> Reads the CSV file and loads into MongoDB to replicate ETL pipeline.
 2. <b> Data Ingestion:</b> Pulls the data from MongoDB and saves as Parquet file.
 3. <b>Data Validation: </b> Takes in artifacts of data ingestion, does schema check (dtypes and columns), data drift report using `ks_2samp and chi2_contingency` (train Vs test)
