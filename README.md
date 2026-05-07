@@ -5,6 +5,8 @@
 [![Backend API](https://img.shields.io/badge/backend-Render-blue)](https://an-end-to-end-customer-churn-prediction.onrender.com/health) 
 [![Dataset](https://img.shields.io/badge/dataset-UC_Irvine_ML_Repository-blue)](https://archive.ics.uci.edu/dataset/502/online+retail+ii)
 
+![App architecture](architecture/churn_architecture.png)
+
 > Built on unlabelled retail transaction data: churn labels were engineered 
 > from scratch using observation and churn window methodology. 
 > Model selected on business cost minimisation (€17,270 at risk) 
@@ -153,7 +155,7 @@ minimising total business cost rather than model metrics alone.
 The pipeline is fully modular and reproducible:
 
 
-![App Screenshot](architecture/churn_architecture.png)
+
 
 1. <b> Push Data:</b> Reads the CSV file and loads into MongoDB to replicate ETL pipeline.
 2. <b> Data Ingestion:</b> Pulls the data from MongoDB and saves as Parquet file.
