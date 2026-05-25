@@ -9,7 +9,7 @@
 [![Docker Hub - Streamlit](https://img.shields.io/badge/docker-Streamlit-blue?logo=docker)](https://hub.docker.com/r/nshk/churn-prediction-streamlit)
 
 
-![App architecture](architecture/Churn_arch.svg)
+![App architecture](architecture/churn_arch.png)
 
 > Built on unlabelled retail transaction data: churn labels were engineered 
 > from scratch using observation and churn window methodology. 
