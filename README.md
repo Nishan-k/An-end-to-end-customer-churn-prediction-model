@@ -5,7 +5,11 @@
 [![Backend API](https://img.shields.io/badge/backend-Render-blue)](https://an-end-to-end-customer-churn-prediction.onrender.com/health) 
 [![Dataset](https://img.shields.io/badge/dataset-UC_Irvine_ML_Repository-blue)](https://archive.ics.uci.edu/dataset/502/online+retail+ii)
 
-![App architecture](architecture/churn_architecture.png)
+[![Docker Hub - FastAPI](https://img.shields.io/badge/docker-FastAPI-blue?logo=docker)](https://hub.docker.com/r/nshk/churn-predicton-fastapi)
+[![Docker Hub - Streamlit](https://img.shields.io/badge/docker-Streamlit-blue?logo=docker)](https://hub.docker.com/r/nshk/churn-prediction-streamlit)
+
+
+![App architecture](architecture/Churn_arch.svg)
 
 > Built on unlabelled retail transaction data: churn labels were engineered 
 > from scratch using observation and churn window methodology. 
@@ -31,7 +35,7 @@
 <li><a href="#techstack"><b> Tech Stack </b> </a></li>
 <li><a href="#mlpipeline"><b>ML Pipeline Components </b> </a></li>
 <li><a href="#projectstructure"><b> Project Structure </b> </a></li>
-<li><a href="#runlocally"><b>Run Locally </b> </a></li>
+<li><a href="#runlocally"><b>Run Locally (Docker Compose) </b> </a></li>
 <li><a href="#futureimprovements"><b>Future Improvements </b> </a></li>
 <li><a href="#connect"><b> Connect </b> </a></li>
 </ol>
@@ -144,7 +148,7 @@ minimising total business cost rather than model metrics alone.
     <td>FastAPI, Uvicorn</td>
     <td>Streamlit, Plotly </td>
     <td>OpenAI GPT‑4o‑mini</td>
-    <td>Streamlit Cloud (UI), Render (backend), cron‑job.org (keep‑alive)</td>
+    <td>Streamlit Cloud (UI), Docker, Render (backend), cron‑job.org (keep‑alive)</td>
     <td>Git, GitHub</td>
 <tr>
 </table>
@@ -262,51 +266,50 @@ hyperparameters identified during experimentation.
 ├── wake_streamlit.js ← To simulate a real user to keep Streamlit UI alive
 ├── push_data.py
 ├── requirements.txt   ← Python dependencies
-└──templates.py   ← To automate the project template creation
+├──templates.py   ← To automate the project template creation
+├── Dockerfile.fastapi    ← Defines container image for FastAPI prediction backend
+├── Dockerfile.streamlit    ← Defines container image for Streamlit frontend
+├── docker-compose.yml      ← Orchestrates multi‑container setup for local development
 ```
 
-<h2 id='runlocally'>10. Run Locally</h2>
+<h2 id='runlocally'>10. Run Locally (Docker Compose)</h2>
 
-**Note:** This project requires a MongoDB database with the 
-Online Retail II dataset loaded. Set `MONGO_DB_URL=your_connection_string` in your `.env` file. To load the data, run `python push_data.py` 
-after configuring your connection string.
+**Prerequisites:** `Docker and Docker Compose` installed on your machine.
 
+
+1. **Clone the repository**
 ```bash
-# 1. Clone the repository
 git clone https://github.com/Nishan-k/An-end-to-end-customer-churn-prediction-model.git
+
 cd An-end-to-end-customer-churn-prediction-model
-
-# 2. Create and activate a virtual environment (Python 3.10)
-python -m venv venv
-
-source venv/bin/activate        # Mac/Linux
-
-venv\Scripts\activate           # Windows
-
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. Set up environment variables:
-Create a `.env` file in the project root with:
-    1. OPENAI_API_KEY=your_openai_key_here
-    2. API_BASE_URL=http://localhost:8000
-
-
-# 5. Run FastAPI backend (in one terminal)
-uvicorn api:app --reload --port 8000
-
-# 6. Run Streamlit frontend (in another terminal)
-streamlit run app.py --server.port 8501
 ```
+
+2. **Set up environment variables**
+
+Create a `.env` file in the project root with your OpenAI API key:
+``` 
+OPENAI_API_KEY=your_openai_key_here
+```
+(The backend URL is already configured inside docker-compose.yml, no additional setup required.)
+
+3. **Build and run the containers**
+```bash
+docker compose up --build
+```
+
+`FastAPI backend`: http://localhost:8000
+
+`Streamlit frontend`: http://localhost:8501
+
+`To stop`: press Ctrl+C or run docker compose down
 
 
 
 <h2 id='futureimprovements'>11. Future Improvements</h2>
 
 1. Batch Prediction: CSV upload with automatic feature engineering (no manual input).
-2. CI/CD pipeline – GitHub Actions → Docker → AWS for automated deployment.
-3. Automated retraining – Apache Airflow (quarterly) with data drift trigger.
-4. Model monitoring – Prometheus + Grafana to track prediction drift and system health.
+2. Automated retraining – Apache Airflow (quarterly) with data drift trigger.
+3. Model monitoring – Prometheus + Grafana to track prediction drift and system health.
 ---
 
 <h2 id='connect'>12. Connect</h2>
