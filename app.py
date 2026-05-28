@@ -1,9 +1,9 @@
 import streamlit as st
-from src.customer_churn.llm.report_generation import report_generation
 from src.streamlit_ui.home import home
 from src.streamlit_ui.predict import predict
 from src.streamlit_ui.generate_report import generate_report
 from src.streamlit_ui.about import about
+import os
 
 
 
